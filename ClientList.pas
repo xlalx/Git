@@ -5,6 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, MemTableDataEh, Db, ADODB, DBGridEhGrouping, ToolCtrlsEh,
+  EhLibADO,
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   MemTableEh, DataDriverEh, ADODataDriverEh, StdCtrls;
 
@@ -23,6 +24,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure DBGridEh1SortMarkingChanged(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,15 +53,11 @@ begin
 end;
 
 procedure TClientListForm.SetGridColumn;
-var
- i: Integer;
 begin
  if FileExists(FileNameIni) then
     DBGridEh1.RestoreColumnsLayoutIni(FileNameIni,'ClientListForm_DBGridEh1', [crpColIndexEh, crpColWidthsEh, crpColVisibleEh])
  else
    begin
-     //for i:=0 to 4 do
-
      DBGridEh1.Columns[0].Width:=150;
      DBGridEh1.Columns[0].Title.Caption:='Имя';
 
@@ -108,6 +106,7 @@ begin
   FileNameIni:=ExtractFilePath(ParamStr(0))+'\clients.ini';
   SetGridColumn;
   DBGridEh1.SaveColumnsLayoutIni(FileNameIni, 'ClientListForm_DBGridEh1',true);
+  //DBGridEh1.DefaultApplySorting;
 end;
 
 procedure TClientListForm.FormDestroy(Sender: TObject);
@@ -128,6 +127,20 @@ begin
       Button1.Caption := 'Фильтр';
       //DBEditEh1.Text := '';
     end;
+end;
+
+procedure TClientListForm.DBGridEh1SortMarkingChanged(Sender: TObject);
+var
+  i : integer;
+begin
+   for i := 0 to DBGridEh1.SortMarkedColumns.Count - 1 do
+     begin
+       MemTableEh1.SortOrder:=DBGridEh1.SortMarkedColumns.Items[i].FieldName;
+       if DBGridEh1.SortMarkedColumns.Items[i].Title.SortMarker = smUpEh then
+          MemTableEh1.SortOrder := MemTableEh1.SortOrder + ' ASC'
+       else
+          MemTableEh1.SortOrder := MemTableEh1.SortOrder + ' DESC';
+    end
 end;
 
 end.

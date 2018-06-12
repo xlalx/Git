@@ -23,14 +23,17 @@ object ClientListForm: TClientListForm
     Width = 873
     Height = 385
     AllowedOperations = []
-    DataGrouping.Active = True
+    ColumnDefValues.Title.TitleButton = True
     DataSource = DataSource1
     DynProps = <>
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
     ReadOnly = True
     SearchPanel.Enabled = True
+    SortLocal = True
     TabOrder = 0
     TitleParams.SortMarkerStyle = smstDefaultEh
     OnColWidthsChanged = DBGridEh1ColWidthsChanged
+    OnSortMarkingChanged = DBGridEh1SortMarkingChanged
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
@@ -75,6 +78,7 @@ object ClientListForm: TClientListForm
     Active = True
     Params = <>
     DataDriver = ADODataDriverEh1
+    ReadOnly = True
     AfterOpen = MemTableEh1AfterOpen
     Left = 648
     Top = 424
