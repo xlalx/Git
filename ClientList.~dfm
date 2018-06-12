@@ -61,7 +61,7 @@ object ClientListForm: TClientListForm
     DynaSQLParams.Options = []
     MacroVars.Macros = <>
     SelectCommand.CommandText.Strings = (
-      'select FirstName, SurName, Address, Email, Phone from clients')
+      'select id,FirstName, SurName, Address, Email, Phone from clients')
     SelectCommand.Parameters = <>
     UpdateCommand.Parameters = <>
     InsertCommand.Parameters = <>
@@ -84,9 +84,42 @@ object ClientListForm: TClientListForm
   end
   object MemTableEh1: TMemTableEh
     Active = True
+    FieldDefs = <
+      item
+        Name = 'id'
+        DataType = ftAutoInc
+        Precision = 15
+      end
+      item
+        Name = 'FirstName'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'SurName'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'Address'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'Email'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'Phone'
+        DataType = ftWideString
+        Size = 255
+      end>
+    IndexDefs = <>
     Params = <>
     DataDriver = ADODataDriverEh1
     ReadOnly = True
+    StoreDefs = True
     AfterOpen = MemTableEh1AfterOpen
     Left = 648
     Top = 424

@@ -33,13 +33,6 @@ object ClientListForm: TClientListForm
     TabOrder = 0
     TitleParams.SortMarkerStyle = smstDefaultEh
     OnSortMarkingChanged = DBGridEh1SortMarkingChanged
-    Columns = <
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        Footers = <>
-      end>
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
@@ -68,7 +61,7 @@ object ClientListForm: TClientListForm
     DynaSQLParams.Options = []
     MacroVars.Macros = <>
     SelectCommand.CommandText.Strings = (
-      'select id,FirstName, SurName, Address, Email, Phone from clients')
+      'select * from clients')
     SelectCommand.Parameters = <>
     UpdateCommand.Parameters = <>
     InsertCommand.Parameters = <>
@@ -93,7 +86,9 @@ object ClientListForm: TClientListForm
     Active = True
     FieldDefs = <
       item
-        Name = 'ID'
+        Name = 'id'
+        DataType = ftAutoInc
+        Precision = 15
       end
       item
         Name = 'FirstName'

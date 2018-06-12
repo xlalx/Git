@@ -21,7 +21,6 @@ type
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
-    procedure DBGridEh1ColWidthsChanged(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -62,20 +61,44 @@ begin
     DBGridEh1.RestoreColumnsLayoutIni(FileNameIni,'ClientListForm_DBGridEh1', [crpColIndexEh, crpColWidthsEh, crpColVisibleEh])
  else
    begin
-     DBGridEh1.Columns[0].Width:=150;
-     DBGridEh1.Columns[0].Title.Caption:='Имя';
+     DBGridEh1.Columns[0].Width:=0;
+     DBGridEh1.Columns[0].Title.Caption:='ID';
+     DBGridEh1.Columns[0].Visible:=false;
 
-     DBGridEh1.Columns[1].Width:=200;
-     DBGridEh1.Columns[1].Title.Caption:='Фамилия';
+     DBGridEh1.Columns[1].Width:=150;
+     DBGridEh1.Columns[1].Title.Caption:='Имя';
 
-     DBGridEh1.Columns[2].Width:=250;
-     DBGridEh1.Columns[2].Title.Caption:='Адрес';
+     DBGridEh1.Columns[2].Width:=200;
+     DBGridEh1.Columns[2].Title.Caption:='Фамилия';
 
-     DBGridEh1.Columns[3].Width:=150;
-     DBGridEh1.Columns[3].Title.Caption:='Эл.почта';
+     DBGridEh1.Columns[3].Width:=250;
+     DBGridEh1.Columns[3].Title.Caption:='Адрес';
 
-     DBGridEh1.Columns[4].Width:=100;
-     DBGridEh1.Columns[4].Title.Caption:='Телефон';
+     DBGridEh1.Columns[4].Width:=0;
+     DBGridEh1.Columns[4].Title.Caption:='Доп. адрес';
+     DBGridEh1.Columns[4].Visible:=false;
+
+     DBGridEh1.Columns[5].Width:=150;
+     DBGridEh1.Columns[5].Title.Caption:='Эл.почта';
+
+     DBGridEh1.Columns[6].Width:=0;
+     DBGridEh1.Columns[6].Title.Caption:='Доп. эл. почта';
+     DBGridEh1.Columns[6].Visible:=false;
+
+     DBGridEh1.Columns[7].Width:=100;
+     DBGridEh1.Columns[7].Title.Caption:='Телефон';
+
+     DBGridEh1.Columns[8].Width:=0;
+     DBGridEh1.Columns[8].Title.Caption:='Доп. телефон';
+     DBGridEh1.Columns[8].Visible:=false;
+
+     DBGridEh1.Columns[9].Width:=0;
+     DBGridEh1.Columns[9].Title.Caption:='Дата создания';
+     DBGridEh1.Columns[9].Visible:=false;
+
+     DBGridEh1.Columns[10].Width:=0;
+     DBGridEh1.Columns[10].Title.Caption:='Дата корректировки';
+     DBGridEh1.Columns[10].Visible:=false;
 
      DBGridEh1.Width :=875;
    end;
@@ -95,12 +118,6 @@ begin
  col.Visible :=visible;
  }
  //DBGridEh1.Columns.SaveToFile('clients.ini');
-end;
-
-procedure TClientListForm.DBGridEh1ColWidthsChanged(Sender: TObject);
-begin
-  //DBGridEh1.Columns.SaveToFile('clients.ini');
-  //DBGridEh1.SaveColumnsLayout(DefaultIniStorage, 'ClientListForm_DBGridEh1');
 end;
 
 procedure TClientListForm.FormCreate(Sender: TObject);
@@ -155,7 +172,7 @@ begin
   clientEditForm:=TClientEditForm.Create(Application);
   clientEditForm.ShowModal;
   if clientEditForm.ModalResult = mrOk then;
-     //ADOQuery1.Post;
+  //ADOQuery1.Post;
   clientEditForm.Free;
 end;
 
