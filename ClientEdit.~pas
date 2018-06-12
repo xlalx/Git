@@ -38,6 +38,7 @@ type
     procedure Edit6KeyPress(Sender: TObject; var Key: Char);
     procedure Edit7KeyPress(Sender: TObject; var Key: Char);
     procedure Edit8KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,9 +56,6 @@ uses ClientList;
 
 procedure TClientEditForm.FormCreate(Sender: TObject);
 begin
-  //ADODataDriverEh1.SelectSQL. :='select * from clients where id = '+
-  //                 ClientListForm.DBGridEh1.FieldColumns['id'].DisplayText;
-  //Edit1.Text := ClientListForm.DBGridEh1.FieldColumns['FirstName'].DisplayText;
   Edit1.Text := ClientListForm.DBGridEh1.FieldColumns['FirstName'].DisplayText;
   Edit2.Text := ClientListForm.DBGridEh1.FieldColumns['SurName'].DisplayText;
   Edit3.Text := ClientListForm.DBGridEh1.FieldColumns['Address'].DisplayText;
@@ -65,7 +63,7 @@ begin
   Edit5.Text := ClientListForm.DBGridEh1.FieldColumns['Email'].DisplayText;
   Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Email2'].DisplayText;
   Edit7.Text := ClientListForm.DBGridEh1.FieldColumns['Phone'].DisplayText;
-  Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Phone2'].DisplayText;        
+  Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Phone2'].DisplayText;
 end;
 
 procedure TClientEditForm.Edit1KeyPress(Sender: TObject; var Key: Char);
@@ -114,6 +112,12 @@ procedure TClientEditForm.Edit8KeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = Char(VK_RETURN) then
      Button1.SetFocus;
+end;
+
+procedure TClientEditForm.Button1Click(Sender: TObject);
+begin
+  //ClientListForm.DBGridEh1.FieldColumns['FirstName'].DisplayText := Edit1.Text;
+  ClientListForm.DBGridEh1.FieldColumns['FirstName'].
 end;
 
 end.

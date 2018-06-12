@@ -29,6 +29,7 @@ type
     Edit8: TEdit;
     Button1: TButton;
     Button2: TButton;
+    DBEditEh1: TDBEditEh;
     procedure FormCreate(Sender: TObject);
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure Edit2KeyPress(Sender: TObject; var Key: Char);
@@ -38,6 +39,9 @@ type
     procedure Edit6KeyPress(Sender: TObject; var Key: Char);
     procedure Edit7KeyPress(Sender: TObject; var Key: Char);
     procedure Edit8KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -62,7 +66,9 @@ begin
   Edit5.Text := ClientListForm.DBGridEh1.FieldColumns['Email'].DisplayText;
   Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Email2'].DisplayText;
   Edit7.Text := ClientListForm.DBGridEh1.FieldColumns['Phone'].DisplayText;
-  Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Phone2'].DisplayText;        
+  Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Phone2'].DisplayText;
+  //ClientListForm.MemTableEh1.
+  ClientListForm.MemTableEh1.Edit;
 end;
 
 procedure TClientEditForm.Edit1KeyPress(Sender: TObject; var Key: Char);
@@ -111,6 +117,26 @@ procedure TClientEditForm.Edit8KeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = Char(VK_RETURN) then
      Button1.SetFocus;
+end;
+
+procedure TClientEditForm.Button1Click(Sender: TObject);
+begin
+  //ClientListForm.DBGridEh1.FieldColumns['FirstName'].DisplayText := Edit1.Text;
+  //ClientListForm.DBGridEh1.FieldColumns['FirstName'].
+  ClientListForm.MemTableEh1.Post;
+  ClientListForm.MemTableEh1.Close;
+  ClientListForm.MemTableEh1.Open;
+end;
+
+procedure TClientEditForm.Button2Click(Sender: TObject);
+begin
+    ClientListForm.MemTableEh1.Cancel;
+end;
+
+procedure TClientEditForm.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  ClientListForm.MemTableEh1.Cancel;
 end;
 
 end.

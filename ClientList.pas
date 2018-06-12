@@ -18,6 +18,8 @@ type
     DBGridEh1: TDBGridEh;
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -26,12 +28,19 @@ type
     procedure Button1Click(Sender: TObject);
     procedure DBGridEh1SortMarkingChanged(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     procedure SetGridColumn;
+    procedure SetGridButton;
   end;
+
+//Количество записей, при которых таблица считается пустой
+const
+  EMPTYTABLE=4;
 
 var
   ClientListForm: TClientListForm;
@@ -104,30 +113,26 @@ begin
    end;
 end;
 
+procedure TClientListForm.SetGridButton;
+begin
+  if DbGridEh1.RowCount <=  EMPTYTABLE+1 then
+     Button3.Enabled := false
+  else
+     Button3.Enabled := true;
+  Button2.Enabled := Button3.Enabled;
+end;
+
 procedure TClientListForm.MemTableEh1AfterOpen(DataSet: TDataSet);
 begin
  SetGridColumn;
- // Работа с колонками
- //addEhColumns('FirstName','Имя',true,DBGridEh1,74 );
-
- {
- col:=DBGridEh1.Columns.Add;
- col.FieldName :='FirstName';
- col.Title.Caption :='Имя';
- col.Width :=150;
- col.Visible :=visible;
- }
- //DBGridEh1.Columns.SaveToFile('clients.ini');
 end;
 
 procedure TClientListForm.FormCreate(Sender: TObject);
 begin
-  //DBGridEh1.SaveColumnsLayout(DefaultIniStorage, 'ClientListForm_DBGridEh1');
-  //DBGridEh1.RestoreColumnsLayout(IniStorage, 'ClientListForm_DBGridEh1', [crpColIndexEh, crpColWidthsEh, crpColVisibleEh]);
   FileNameIni:=ExtractFilePath(ParamStr(0))+'\clients.ini';
+  //Инициализация грида
   SetGridColumn;
   DBGridEh1.SaveColumnsLayoutIni(FileNameIni, 'ClientListForm_DBGridEh1',true);
-  //DBGridEh1.DefaultApplySorting;
 end;
 
 procedure TClientListForm.FormDestroy(Sender: TObject);
@@ -146,7 +151,6 @@ begin
     begin
       DBGridEh1.SearchPanel.CancelSearchFilter;
       Button1.Caption := 'Фильтр';
-      //DBEditEh1.Text := '';
     end;
 end;
 
@@ -161,7 +165,7 @@ begin
           MemTableEh1.SortOrder := MemTableEh1.SortOrder + ' ASC'
        else
           MemTableEh1.SortOrder := MemTableEh1.SortOrder + ' DESC';
-    end
+    end;
 end;
 
 procedure TClientListForm.Button2Click(Sender: TObject);
@@ -174,6 +178,37 @@ begin
   if clientEditForm.ModalResult = mrOk then;
   //ADOQuery1.Post;
   clientEditForm.Free;
+end;
+
+procedure TClientListForm.Button3Click(Sender: TObject);
+  var buttonSel  : Integer;
+begin
+  buttonSel := MessageDlg('Вы уверены, что хотите удалить клиента?',mtCustom, mbOKCancel, 0);
+  if buttonSel = mrOK then
+     begin
+        //ADODataDriverEh1.DeleteSQL[0]:=ADODataDriverEh1.DeleteSQL[0]+DBGridEh1.FieldColumns['id'].DisplayText;
+        MemTableEh1.Delete;
+     end;
+  SetGridButton;
+{
+try
+if Query1.Active then Close;
+Query1.SQL.Clear; //типа очищаем свойство в котором текст запроса хранится
+
+Query1.Sql.Add("delete * from your_table where field="+
+DBGrid1.Fields[0].AsString); //здесь подставляя первый столбец DBGrid"a выделенной курсором строки и выполняя эту команду ты удаляешь строку в таблице. Свойство Fields нумеруется с нуля.
+Query1.ExecSQL;//Метод специально предназначен для Delete или Insert, т.е. он не возвращает результатов
+except
+on E:Exception do
+ShowMessage(E.Message);
+end;
+}
+end;
+
+procedure TClientListForm.FormActivate(Sender: TObject);
+begin
+  //Инициализация грида
+  SetGridButton;
 end;
 
 end.
