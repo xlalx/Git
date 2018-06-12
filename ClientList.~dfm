@@ -139,6 +139,7 @@ object ClientListForm: TClientListForm
           DataSource = DataSource1
           DynProps = <>
           EditButtons = <>
+          ReadOnly = True
           TabOrder = 2
           Visible = True
         end
@@ -151,6 +152,7 @@ object ClientListForm: TClientListForm
           DataSource = DataSource1
           DynProps = <>
           EditButtons = <>
+          ReadOnly = True
           TabOrder = 3
           Visible = True
         end
@@ -163,6 +165,7 @@ object ClientListForm: TClientListForm
           DataSource = DataSource1
           DynProps = <>
           EditButtons = <>
+          ReadOnly = True
           TabOrder = 4
           Visible = True
         end
@@ -175,6 +178,7 @@ object ClientListForm: TClientListForm
           DataSource = DataSource1
           DynProps = <>
           EditButtons = <>
+          ReadOnly = True
           TabOrder = 5
           Visible = True
         end
@@ -187,6 +191,7 @@ object ClientListForm: TClientListForm
           DataSource = DataSource1
           DynProps = <>
           EditButtons = <>
+          ReadOnly = True
           TabOrder = 6
           Visible = True
         end
@@ -199,6 +204,7 @@ object ClientListForm: TClientListForm
           DataSource = DataSource1
           DynProps = <>
           EditButtons = <>
+          ReadOnly = True
           TabOrder = 7
           Visible = True
         end
@@ -253,10 +259,29 @@ object ClientListForm: TClientListForm
     UpdateCommand.CommandText.Strings = (
       'update clients'
       'set'
-      '  FirstName = "'#1057#1084#1080#1088#1085#1086#1074'"'
+      '  FirstName = :FirstName,'
+      '  SurName = :SurName'
       'where'
       '  id = :OLD_id')
     UpdateCommand.Parameters = <
+      item
+        Name = 'FirstName'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'SurName'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
       item
         Name = 'OLD_id'
         Attributes = [paNullable]

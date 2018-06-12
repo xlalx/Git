@@ -190,15 +190,10 @@ end;
 
 procedure TClientListForm.Button2Click(Sender: TObject);
 begin
-  //ADOQuery1.Insert;
-  //clientEditForm1:=Form1.Create(Application);
-  //Application.CreateForm(TClientEditForm, ClientEditForm);
   clientEditForm:=TClientEditForm.Create(Application);
-  MemTableEh1.Edit;
-  clientEditForm.ShowModal;
   if clientEditForm.ModalResult = mrOk then
      MemTableEh1.Post;
-   //ADOQuery1.Post;
+  clientEditForm.ShowModal;
   clientEditForm.Free;
 end;
 
@@ -236,11 +231,10 @@ end;
 procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
-  MemTableEh1.Insert;
+  MemTableEh1.Append;
   clientEditForm.ShowModal;
   if clientEditForm.ModalResult = mrOk then
      MemTableEh1.Post;
-  //ADOQuery1.Post;
   clientEditForm.Free;
 end;
 

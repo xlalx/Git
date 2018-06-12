@@ -12,24 +12,22 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    Edit1: TEdit;
-    Edit2: TEdit;
-    ADODataDriverEh1: TADODataDriverEh;
     Label4: TLabel;
-    Edit3: TEdit;
     Label5: TLabel;
-    Edit4: TEdit;
     Label6: TLabel;
-    Edit5: TEdit;
     Label7: TLabel;
-    Edit6: TEdit;
     Label8: TLabel;
-    Edit7: TEdit;
     Label9: TLabel;
-    Edit8: TEdit;
     Button1: TButton;
     Button2: TButton;
     DBEditEh1: TDBEditEh;
+    DBEditEh2: TDBEditEh;
+    DBEditEh3: TDBEditEh;
+    DBEditEh4: TDBEditEh;
+    DBEditEh5: TDBEditEh;
+    DBEditEh6: TDBEditEh;
+    DBEditEh7: TDBEditEh;
+    DBEditEh8: TDBEditEh;
     procedure FormCreate(Sender: TObject);
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure Edit2KeyPress(Sender: TObject; var Key: Char);
@@ -59,6 +57,7 @@ uses ClientList;
 
 procedure TClientEditForm.FormCreate(Sender: TObject);
 begin
+  {
   Edit1.Text := ClientListForm.DBGridEh1.FieldColumns['FirstName'].DisplayText;
   Edit2.Text := ClientListForm.DBGridEh1.FieldColumns['SurName'].DisplayText;
   Edit3.Text := ClientListForm.DBGridEh1.FieldColumns['Address'].DisplayText;
@@ -67,53 +66,53 @@ begin
   Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Email2'].DisplayText;
   Edit7.Text := ClientListForm.DBGridEh1.FieldColumns['Phone'].DisplayText;
   Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Phone2'].DisplayText;
+  }
   //ClientListForm.MemTableEh1.
-  ClientListForm.MemTableEh1.Edit;
 end;
 
-procedure TClientEditForm.Edit1KeyPress(Sender: TObject; var Key: Char);
+procedure TClientEditForm.DBEditEh1KeyPress(Sender: TObject; var Key: Char);
 begin
-  if (Key = Char(VK_RETURN)) and (length(Edit1.Text) > 0) then
-     Edit2.SetFocus;
+  if (Key = Char(VK_RETURN)) and (length(DBEditEh1.Text) > 0) then
+     DBEditEh2.SetFocus;
 end;
 
-procedure TClientEditForm.Edit2KeyPress(Sender: TObject; var Key: Char);
+procedure TClientEditForm.DBEditEh2KeyPress(Sender: TObject; var Key: Char);
 begin
-  if (Key = Char(VK_RETURN)) and (length(Edit2.Text) > 0) then
-     Edit3.SetFocus;
+  if (Key = Char(VK_RETURN)) and (length(DBEditEh2.Text) > 0) then
+     DBEditEh3.SetFocus;
 end;
 
-procedure TClientEditForm.Edit3KeyPress(Sender: TObject; var Key: Char);
+procedure TClientEditForm.DBEditEh3KeyPress(Sender: TObject; var Key: Char);
 begin
-  if (Key = Char(VK_RETURN)) and (length(Edit3.Text) > 0) then
-     Edit4.SetFocus;
+  if (Key = Char(VK_RETURN)) and (length(DBEditEh3.Text) > 0) then
+     DBEditEh4.SetFocus;
 end;
 
 procedure TClientEditForm.Edit4KeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = Char(VK_RETURN) then
-     Edit5.SetFocus;
+     DBEditEh5.SetFocus;
 end;
 
-procedure TClientEditForm.Edit5KeyPress(Sender: TObject; var Key: Char);
+procedure TClientEditForm.DBEditEh5KeyPress(Sender: TObject; var Key: Char);
 begin
-  if (Key = Char(VK_RETURN)) and (length(Edit5.Text) > 0) then
-     Edit6.SetFocus;
+  if (Key = Char(VK_RETURN)) and (length(DBEditEh5.Text) > 0) then
+     DBEditEh6.SetFocus;
 end;
 
-procedure TClientEditForm.Edit6KeyPress(Sender: TObject; var Key: Char);
+procedure TClientEditForm.DBEditEh6KeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = Char(VK_RETURN) then
-     Edit7.SetFocus;
+     DBEditEh7.SetFocus;
 end;
 
-procedure TClientEditForm.Edit7KeyPress(Sender: TObject; var Key: Char);
+procedure TClientEditForm.DBEditEh7KeyPress(Sender: TObject; var Key: Char);
 begin
-  if (Key = Char(VK_RETURN)) and (length(Edit7.Text) > 0) then
-     Edit8.SetFocus;
+  if (Key = Char(VK_RETURN)) and (length(DBEditEh7.Text) > 0) then
+     DBEditEh8.SetFocus;
 end;
 
-procedure TClientEditForm.Edit8KeyPress(Sender: TObject; var Key: Char);
+procedure TClientEditForm.DBEditEh8KeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = Char(VK_RETURN) then
      Button1.SetFocus;
@@ -121,27 +120,20 @@ end;
 
 procedure TClientEditForm.Button1Click(Sender: TObject);
 begin
-  //ClientListForm.DBGridEh1.FieldColumns['FirstName'].DisplayText := Edit1.Text;
-  //ClientListForm.DBGridEh1.FieldColumns['FirstName'].
-  {with ClientListForm.MemTableEh1 do
-    begin
-      Post;
-      Close;
-      Open;
-    end;}
+  clientListForm.MemTableEh1.Post;
   clientEditForm.close;
 end;
 
 procedure TClientEditForm.Button2Click(Sender: TObject);
 begin
-   //ClientListForm.MemTableEh1.Cancel;
+   ClientListForm.MemTableEh1.Cancel;
    clientEditForm.close;
 end;
 
 procedure TClientEditForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-   clientListForm.MemTableEh1.Cancel;
+   //clientListForm.MemTableEh1.Cancel;
 end;
 
 end.

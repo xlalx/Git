@@ -115,6 +115,7 @@ object ClientListForm: TClientListForm
           DataSource = DataSource1
           DynProps = <>
           EditButtons = <>
+          ReadOnly = True
           TabOrder = 0
           Visible = True
         end
@@ -127,6 +128,7 @@ object ClientListForm: TClientListForm
           DataSource = DataSource1
           DynProps = <>
           EditButtons = <>
+          ReadOnly = True
           TabOrder = 1
           Visible = True
         end
@@ -260,7 +262,13 @@ object ClientListForm: TClientListForm
       'update clients'
       'set'
       '  FirstName = :FirstName,'
-      '  SurName = :SurName'
+      '  SurName = :SurName,'
+      '  Address = :Address,'
+      '  Address2 = :Address2,'
+      '  Email = :Email,'
+      '  Email2 = :Email,'
+      '  Phone = :Phone,'
+      '  Phone2 = :Phone2'
       'where'
       '  id = :OLD_id')
     UpdateCommand.Parameters = <
@@ -283,6 +291,60 @@ object ClientListForm: TClientListForm
         Value = Null
       end
       item
+        Name = 'Address'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Address2'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Email'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Email'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Phone'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Phone2'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
         Name = 'OLD_id'
         Attributes = [paNullable]
         DataType = ftWideString
@@ -294,12 +356,12 @@ object ClientListForm: TClientListForm
     InsertCommand.CommandText.Strings = (
       'insert into clients'
       
-        '  (FirstName,SurName, Address1, Address2, Email, Email2, Phone, ' +
-        'Phone2)'
+        '  (FirstName,SurName, Address, Address2, Email, Email2, Phone, P' +
+        'hone2)'
       'values'
       
-        '  (:FirstName, :SurName, :Address2, :Address2, :Email, :Email2, ' +
-        ':Phone, :Phone2)')
+        '  (:FirstName, :SurName, :Address, :Address2, :Email, :Email2, :' +
+        'Phone, :Phone2)')
     InsertCommand.Parameters = <
       item
         Name = 'FirstName'
@@ -320,7 +382,7 @@ object ClientListForm: TClientListForm
         Value = Null
       end
       item
-        Name = 'Address2'
+        Name = 'Address'
         Attributes = [paNullable]
         DataType = ftWideString
         NumericScale = 255
