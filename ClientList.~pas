@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, MemTableDataEh, Db, ADODB, DBGridEhGrouping, ToolCtrlsEh,
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
-  MemTableEh, DataDriverEh, ADODataDriverEh;
+  MemTableEh, DataDriverEh, ADODataDriverEh, StdCtrls;
 
 type
   TClientListForm = class(TForm)
@@ -15,12 +15,14 @@ type
     DataSource1: TDataSource;
     MemTableEh1: TMemTableEh;
     DBGridEh1: TDBGridEh;
+    Button1: TButton;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
     procedure DBGridEh1ColWidthsChanged(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -111,6 +113,21 @@ end;
 procedure TClientListForm.FormDestroy(Sender: TObject);
 begin
   DBGridEh1.SaveColumnsLayoutIni(FileNameIni, 'ClientListForm_DBGridEh1',true);
+end;
+
+procedure TClientListForm.Button1Click(Sender: TObject);
+begin
+  if Button1.Caption = 'Фильтр' then
+    begin
+      DBGridEh1.SearchPanel.ApplySearchFilter;
+      Button1.Caption := 'Убрать фильтр';
+    end
+  else
+    begin
+      DBGridEh1.SearchPanel.CancelSearchFilter;
+      Button1.Caption := 'Фильтр';
+      //DBEditEh1.Text := '';
+    end;
 end;
 
 end.

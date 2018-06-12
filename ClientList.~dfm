@@ -4,8 +4,8 @@ object ClientListForm: TClientListForm
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1056#1072#1073#1086#1090#1072' '#1089' '#1082#1083#1080#1077#1085#1090#1072#1084#1080
-  ClientHeight = 465
-  ClientWidth = 915
+  ClientHeight = 481
+  ClientWidth = 916
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,16 +19,29 @@ object ClientListForm: TClientListForm
   TextHeight = 13
   object DBGridEh1: TDBGridEh
     Left = 24
-    Top = 24
+    Top = 40
     Width = 873
     Height = 385
+    AllowedOperations = []
+    DataGrouping.Active = True
     DataSource = DataSource1
     DynProps = <>
     ReadOnly = True
+    SearchPanel.Enabled = True
     TabOrder = 0
+    TitleParams.SortMarkerStyle = smstDefaultEh
     OnColWidthsChanged = DBGridEh1ColWidthsChanged
     object RowDetailData: TRowDetailPanelControlEh
     end
+  end
+  object Button1: TButton
+    Left = 24
+    Top = 8
+    Width = 89
+    Height = 25
+    Caption = #1060#1080#1083#1100#1090#1088
+    TabOrder = 1
+    OnClick = Button1Click
   end
   object ADODataDriverEh1: TADODataDriverEh
     ConnectionString = 
