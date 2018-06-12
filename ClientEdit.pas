@@ -42,6 +42,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    //function CheckEmptyFields:boolean;
   public
     { Public declarations }
   end;
@@ -96,7 +97,7 @@ end;
 
 procedure TClientEditForm.DBEditEh5KeyPress(Sender: TObject; var Key: Char);
 begin
-  if (Key = Char(VK_RETURN)) and (length(DBEditEh5.Text) > 0) then
+  if Key = Char(VK_RETURN) then
      DBEditEh6.SetFocus;
 end;
 
@@ -120,6 +121,30 @@ end;
 
 procedure TClientEditForm.Button1Click(Sender: TObject);
 begin
+  if length(DBEditEh1.Text) = 0 then
+    begin
+       MessageDlg('Заполните поле Имя',mtError,[mbOK],0);
+       DBEditEh1.SetFocus;
+       Exit;
+    end;
+  if length(DBEditEh2.Text) = 0 then
+    begin
+       MessageDlg('Заполните поле Фамилия',mtError,[mbOK],0);
+       DBEditEh2.SetFocus;
+       Exit;
+    end;
+  if length(DBEditEh3.Text) = 0 then
+    begin
+       MessageDlg('Заполните поле Адрес',mtError,[mbOK],0);
+       DBEditEh3.SetFocus;
+       Exit;
+    end;
+  if length(DBEditEh7.Text) = 0 then
+    begin
+       MessageDlg('Заполните поле Телефон',mtError,[mbOK],0);
+       DBEditEh7.SetFocus;
+       Exit;
+    end;
   clientEditForm.close;
 end;
 

@@ -107,7 +107,7 @@ object ClientEditForm: TClientEditForm
     EditButtons = <>
     TabOrder = 2
     Visible = True
-    OnKeyPress = Edit1KeyPress
+    OnKeyPress = DBEditEh1KeyPress
   end
   object DBEditEh2: TDBEditEh
     Left = 96
@@ -120,18 +120,20 @@ object ClientEditForm: TClientEditForm
     EditButtons = <>
     TabOrder = 3
     Visible = True
+    OnKeyPress = DBEditEh2KeyPress
   end
   object DBEditEh3: TDBEditEh
     Left = 96
     Top = 112
     Width = 209
     Height = 21
-    DataField = 'Address2'
+    DataField = 'Address'
     DataSource = ClientListForm.DataSource1
     DynProps = <>
     EditButtons = <>
     TabOrder = 4
     Visible = True
+    OnKeyPress = DBEditEh3KeyPress
   end
   object DBEditEh4: TDBEditEh
     Left = 456
@@ -144,6 +146,7 @@ object ClientEditForm: TClientEditForm
     EditButtons = <>
     TabOrder = 5
     Visible = True
+    OnKeyPress = DBEditEh4KeyPress
   end
   object DBEditEh5: TDBEditEh
     Left = 96
@@ -156,6 +159,7 @@ object ClientEditForm: TClientEditForm
     EditButtons = <>
     TabOrder = 6
     Visible = True
+    OnKeyPress = DBEditEh5KeyPress
   end
   object DBEditEh6: TDBEditEh
     Left = 456
@@ -168,6 +172,7 @@ object ClientEditForm: TClientEditForm
     EditButtons = <>
     TabOrder = 7
     Visible = True
+    OnKeyPress = DBEditEh6KeyPress
   end
   object DBEditEh7: TDBEditEh
     Left = 96
@@ -180,6 +185,7 @@ object ClientEditForm: TClientEditForm
     EditButtons = <>
     TabOrder = 8
     Visible = True
+    OnKeyPress = DBEditEh7KeyPress
   end
   object DBEditEh8: TDBEditEh
     Left = 456
@@ -192,5 +198,6 @@ object ClientEditForm: TClientEditForm
     EditButtons = <>
     TabOrder = 9
     Visible = True
+    OnKeyPress = DBEditEh8KeyPress
   end
 end

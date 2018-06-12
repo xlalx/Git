@@ -191,9 +191,14 @@ end;
 procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
-  if clientEditForm.ModalResult = mrOk then
-     MemTableEh1.Post;
   clientEditForm.ShowModal;
+  //if clientEditForm.ModalResult = mrOk then
+  //   begin
+       MemTableEh1.Post;
+       MemTableEh1.Active:=false;
+       MemTableEh1.Active:=true;
+  //     MemTableEh1.Open;
+  //  end;
   clientEditForm.Free;
 end;
 
@@ -231,10 +236,15 @@ end;
 procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
-  MemTableEh1.Append;
+  MemTableEh1.Insert;
   clientEditForm.ShowModal;
-  if clientEditForm.ModalResult = mrOk then
-     MemTableEh1.Post;
+//  if clientEditForm.ModalResult = mrOk then
+//    begin
+//     MemTableEh1.Post;
+//    end;
+  MemTableEh1.Post;
+  MemTableEh1.Active:=false;
+  MemTableEh1.Active:=true;
   clientEditForm.Free;
 end;
 

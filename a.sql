@@ -20,3 +20,21 @@ set
   Preferred = :Preferred
 where
   VendorNo = :OLD_VendorNo
+
+---
+
+insert into clients
+  (FirstName,SurName, Address, Address2, Email, Email2, Phone, Phone2)
+values
+  (:FirstName, :SurName, :Address, :Address2, :Email, :Email2, :Phone, :Phone2)
+---
+
+select *
+from
+  vendors
+where
+  VendorNo = :OLD_VendorNo
+
+----
+
+AUTO_INCREMENT_FIELD=VendorNo

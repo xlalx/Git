@@ -29,19 +29,20 @@ type
     DBEditEh7: TDBEditEh;
     DBEditEh8: TDBEditEh;
     procedure FormCreate(Sender: TObject);
-    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
-    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
-    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
-    procedure Edit4KeyPress(Sender: TObject; var Key: Char);
-    procedure Edit5KeyPress(Sender: TObject; var Key: Char);
-    procedure Edit6KeyPress(Sender: TObject; var Key: Char);
-    procedure Edit7KeyPress(Sender: TObject; var Key: Char);
-    procedure Edit8KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEditEh1KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEditEh2KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEditEh3KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEditEh4KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEditEh5KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEditEh6KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEditEh7KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEditEh8KeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    //function CheckEmptyFields:boolean;
   public
     { Public declarations }
   end;
@@ -88,7 +89,7 @@ begin
      DBEditEh4.SetFocus;
 end;
 
-procedure TClientEditForm.Edit4KeyPress(Sender: TObject; var Key: Char);
+procedure TClientEditForm.DBEditEh4KeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = Char(VK_RETURN) then
      DBEditEh5.SetFocus;
@@ -96,7 +97,7 @@ end;
 
 procedure TClientEditForm.DBEditEh5KeyPress(Sender: TObject; var Key: Char);
 begin
-  if (Key = Char(VK_RETURN)) and (length(DBEditEh5.Text) > 0) then
+  if Key = Char(VK_RETURN) then
      DBEditEh6.SetFocus;
 end;
 
@@ -120,7 +121,26 @@ end;
 
 procedure TClientEditForm.Button1Click(Sender: TObject);
 begin
-  clientListForm.MemTableEh1.Post;
+  if length(DBEditEh1.Text) = 0 then
+    begin
+       MessageDlg('Заполните поле Имя',mtError,[mbOK],0)
+       DBEditEh1.SetFocus;
+    end;
+  if length(DBEditEh2.Text) = 0 then
+    begin
+       MessageDlg('Заполните поле Фамилия',mtError,[mbOK],0)
+       DBEditEh2.SetFocus;
+    end;
+  if length(DBEditEh3.Text) = 0 then
+    begin
+       MessageDlg('Заполните поле Адрес',mtError,[mbOK],0)
+       DBEditEh3.SetFocus;
+    end;
+  if length(DBEditEh7.Text) = 0 then
+    begin
+       MessageDlg('Заполните поле Телефон',mtError,[mbOK],0)
+       DBEditEh7.SetFocus;
+    end;
   clientEditForm.close;
 end;
 

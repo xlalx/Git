@@ -255,6 +255,8 @@ object ClientListForm: TClientListForm
       'ist Security Info=False'
     DynaSQLParams.Options = []
     MacroVars.Macros = <>
+    SpecParams.Strings = (
+      'AUTO_INCREMENT_FIELD=id')
     SelectCommand.CommandText.Strings = (
       'select * from clients')
     SelectCommand.Parameters = <>
@@ -447,7 +449,19 @@ object ClientListForm: TClientListForm
         Size = 510
         Value = Null
       end>
-    GetrecCommand.Parameters = <>
+    GetrecCommand.CommandText.Strings = (
+      'select * from clients'
+      'where id = :OLD_id')
+    GetrecCommand.Parameters = <
+      item
+        Name = 'OLD_id'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
     Left = 688
     Top = 424
   end

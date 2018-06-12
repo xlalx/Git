@@ -191,6 +191,8 @@ end;
 procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
+  if clientEditForm.ModalResult = mrOk then
+     MemTableEh1.Post;
   clientEditForm.ShowModal;
   clientEditForm.Free;
 end;
@@ -229,7 +231,12 @@ end;
 procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
+  MemTableEh1.Insert;
   clientEditForm.ShowModal;
+  if clientEditForm.ModalResult = mrOk then
+    begin
+     MemTableEh1.Post;
+    end;
   clientEditForm.Free;
 end;
 
