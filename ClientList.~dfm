@@ -1,9 +1,11 @@
 object ClientListForm: TClientListForm
-  Left = 293
-  Top = 190
-  Width = 865
-  Height = 499
+  Left = 262
+  Top = 175
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = #1056#1072#1073#1086#1090#1072' '#1089' '#1082#1083#1080#1077#1085#1090#1072#1084#1080
+  ClientHeight = 465
+  ClientWidth = 915
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,16 +13,20 @@ object ClientListForm: TClientListForm
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object DBGridEh1: TDBGridEh
-    Left = 16
+    Left = 24
     Top = 24
-    Width = 825
+    Width = 873
     Height = 385
     DataSource = DataSource1
     DynProps = <>
+    ReadOnly = True
     TabOrder = 0
+    OnColWidthsChanged = DBGridEh1ColWidthsChanged
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
@@ -56,6 +62,7 @@ object ClientListForm: TClientListForm
     Active = True
     Params = <>
     DataDriver = ADODataDriverEh1
+    AfterOpen = MemTableEh1AfterOpen
     Left = 648
     Top = 424
   end
