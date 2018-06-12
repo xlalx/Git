@@ -1,7 +1,7 @@
 object ClientListForm: TClientListForm
-  Left = 362
-  Top = 202
-  Width = 840
+  Left = 293
+  Top = 190
+  Width = 865
   Height = 499
   Caption = #1056#1072#1073#1086#1090#1072' '#1089' '#1082#1083#1080#1077#1085#1090#1072#1084#1080
   Color = clBtnFace
@@ -14,9 +14,9 @@ object ClientListForm: TClientListForm
   PixelsPerInch = 96
   TextHeight = 13
   object DBGridEh1: TDBGridEh
-    Left = 32
+    Left = 16
     Top = 24
-    Width = 777
+    Width = 825
     Height = 385
     DataSource = DataSource1
     DynProps = <>
@@ -31,9 +31,7 @@ object ClientListForm: TClientListForm
     DynaSQLParams.Options = []
     MacroVars.Macros = <>
     SelectCommand.CommandText.Strings = (
-      
-        'select FirstName as '#1048#1084#1103', SurName, Address, Email, Phone from cli' +
-        'ents')
+      'select FirstName, SurName, Address, Email, Phone from clients')
     SelectCommand.Parameters = <>
     UpdateCommand.Parameters = <>
     InsertCommand.Parameters = <>
