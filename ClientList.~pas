@@ -17,6 +17,7 @@ type
     MemTableEh1: TMemTableEh;
     DBGridEh1: TDBGridEh;
     Button1: TButton;
+    Button2: TButton;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -25,6 +26,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure DBGridEh1SortMarkingChanged(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,6 +39,8 @@ var
   FileNameIni: String;
 
 implementation
+
+uses ClientEdit;
 
 {$R *.dfm}
 
@@ -53,15 +57,11 @@ begin
 end;
 
 procedure TClientListForm.SetGridColumn;
-var
- i: Integer;
 begin
  if FileExists(FileNameIni) then
     DBGridEh1.RestoreColumnsLayoutIni(FileNameIni,'ClientListForm_DBGridEh1', [crpColIndexEh, crpColWidthsEh, crpColVisibleEh])
  else
    begin
-     //for i:=0 to 4 do
-
      DBGridEh1.Columns[0].Width:=150;
      DBGridEh1.Columns[0].Title.Caption:='Èìÿ';
 
@@ -134,8 +134,29 @@ begin
 end;
 
 procedure TClientListForm.DBGridEh1SortMarkingChanged(Sender: TObject);
+var
+  i : integer;
 begin
-   DBGridEh1.DefaultApplySorting;
+   for i := 0 to DBGridEh1.SortMarkedColumns.Count - 1 do
+     begin
+       MemTableEh1.SortOrder:=DBGridEh1.SortMarkedColumns.Items[i].FieldName;
+       if DBGridEh1.SortMarkedColumns.Items[i].Title.SortMarker = smUpEh then
+          MemTableEh1.SortOrder := MemTableEh1.SortOrder + ' ASC'
+       else
+          MemTableEh1.SortOrder := MemTableEh1.SortOrder + ' DESC';
+    end
+end;
+
+procedure TClientListForm.Button2Click(Sender: TObject);
+begin
+  //ADOQuery1.Insert;
+  //clientEditForm1:=Form1.Create(Application);
+  //Application.CreateForm(TClientEditForm, ClientEditForm);
+  clientEditForm:=TClientEditForm.Create(Application);
+  clientEditForm.ShowModal;
+  if clientEditForm.ModalResult = mrOk then;
+     //ADOQuery1.Post;
+  clientEditForm.Free;
 end;
 
 end.

@@ -17,6 +17,7 @@ type
     MemTableEh1: TMemTableEh;
     DBGridEh1: TDBGridEh;
     Button1: TButton;
+    Button2: TButton;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -25,6 +26,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure DBGridEh1SortMarkingChanged(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,6 +39,8 @@ var
   FileNameIni: String;
 
 implementation
+
+uses ClientEdit;
 
 {$R *.dfm}
 
@@ -141,6 +145,18 @@ begin
        else
           MemTableEh1.SortOrder := MemTableEh1.SortOrder + ' DESC';
     end
+end;
+
+procedure TClientListForm.Button2Click(Sender: TObject);
+begin
+  //ADOQuery1.Insert;
+  //clientEditForm1:=Form1.Create(Application);
+  //Application.CreateForm(TClientEditForm, ClientEditForm);
+  clientEditForm:=TClientEditForm.Create(Application);
+  clientEditForm.ShowModal;
+  if clientEditForm.ModalResult = mrOk then;
+     //ADOQuery1.Post;
+  clientEditForm.Free;
 end;
 
 end.

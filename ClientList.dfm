@@ -1,6 +1,6 @@
 object ClientListForm: TClientListForm
-  Left = 262
-  Top = 175
+  Left = 218
+  Top = 166
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1056#1072#1073#1086#1090#1072' '#1089' '#1082#1083#1080#1077#1085#1090#1072#1084#1080
@@ -33,6 +33,13 @@ object ClientListForm: TClientListForm
     TabOrder = 0
     TitleParams.SortMarkerStyle = smstDefaultEh
     OnSortMarkingChanged = DBGridEh1SortMarkingChanged
+    Columns = <
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        Footers = <>
+      end>
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
@@ -45,6 +52,15 @@ object ClientListForm: TClientListForm
     TabOrder = 1
     OnClick = Button1Click
   end
+  object Button2: TButton
+    Left = 32
+    Top = 440
+    Width = 105
+    Height = 25
+    Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
+    TabOrder = 2
+    OnClick = Button2Click
+  end
   object ADODataDriverEh1: TADODataDriverEh
     ConnectionString = 
       'Provider=Microsoft.ACE.OLEDB.12.0;Data Source=clients.accdb;Pers' +
@@ -52,7 +68,7 @@ object ClientListForm: TClientListForm
     DynaSQLParams.Options = []
     MacroVars.Macros = <>
     SelectCommand.CommandText.Strings = (
-      'select FirstName, SurName, Address, Email, Phone from clients')
+      'select id,FirstName, SurName, Address, Email, Phone from clients')
     SelectCommand.Parameters = <>
     UpdateCommand.Parameters = <>
     InsertCommand.Parameters = <>
@@ -75,9 +91,40 @@ object ClientListForm: TClientListForm
   end
   object MemTableEh1: TMemTableEh
     Active = True
+    FieldDefs = <
+      item
+        Name = 'ID'
+      end
+      item
+        Name = 'FirstName'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'SurName'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'Address'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'Email'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'Phone'
+        DataType = ftWideString
+        Size = 255
+      end>
+    IndexDefs = <>
     Params = <>
     DataDriver = ADODataDriverEh1
     ReadOnly = True
+    StoreDefs = True
     AfterOpen = MemTableEh1AfterOpen
     Left = 648
     Top = 424

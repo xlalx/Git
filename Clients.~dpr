@@ -2,7 +2,8 @@ program Clients;
 
 uses
   Forms,
-  ClientList in 'ClientList.pas' {ClientListForm};
+  ClientList in 'ClientList.pas' {ClientListForm},
+  ClientEdit in 'ClientEdit.pas' {ClientEditForm};
 
 {$R *.res}
 
