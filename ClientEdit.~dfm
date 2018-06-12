@@ -11,6 +11,7 @@ object ClientEditForm: TClientEditForm
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -157,6 +158,19 @@ object ClientEditForm: TClientEditForm
     Height = 25
     Caption = #1054#1090#1084#1077#1085#1072
     TabOrder = 9
+    OnClick = Button2Click
+  end
+  object DBEditEh1: TDBEditEh
+    Left = 392
+    Top = 48
+    Width = 121
+    Height = 21
+    DataField = 'FirstName'
+    DataSource = ClientListForm.DataSource1
+    DynProps = <>
+    EditButtons = <>
+    TabOrder = 10
+    Visible = True
   end
   object ADODataDriverEh1: TADODataDriverEh
     ConnectionProvider = ClientListForm.ADOConnectionProviderEh1

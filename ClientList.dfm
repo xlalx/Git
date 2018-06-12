@@ -19,7 +19,7 @@ object ClientListForm: TClientListForm
   PixelsPerInch = 96
   TextHeight = 13
   object DBGridEh1: TDBGridEh
-    Left = 24
+    Left = 16
     Top = 40
     Width = 873
     Height = 385
@@ -28,12 +28,187 @@ object ClientListForm: TClientListForm
     DataSource = DataSource1
     DynProps = <>
     OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
+    RowDetailPanel.Active = True
+    RowDetailPanel.Height = 190
     SearchPanel.Enabled = True
     SortLocal = True
     TabOrder = 0
     TitleParams.SortMarkerStyle = smstDefaultEh
     OnSortMarkingChanged = DBGridEh1SortMarkingChanged
     object RowDetailData: TRowDetailPanelControlEh
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 836
+        Height = 185
+        Align = alTop
+        TabOrder = 0
+        object Label2: TLabel
+          Left = 24
+          Top = 32
+          Width = 22
+          Height = 13
+          Caption = #1048#1084#1103
+        end
+        object Label8: TLabel
+          Left = 24
+          Top = 156
+          Width = 45
+          Height = 13
+          Caption = #1058#1077#1083#1077#1092#1086#1085
+        end
+        object Label7: TLabel
+          Left = 394
+          Top = 124
+          Width = 135
+          Height = 13
+          Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1072#1103' '#1101#1083'. '#1087#1086#1095#1090#1072
+        end
+        object Label6: TLabel
+          Left = 24
+          Top = 124
+          Width = 47
+          Height = 13
+          Caption = #1069#1083'. '#1087#1086#1095#1090#1072
+        end
+        object Label5: TLabel
+          Left = 392
+          Top = 92
+          Width = 121
+          Height = 13
+          Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1081' '#1072#1076#1088#1077#1089
+        end
+        object Label4: TLabel
+          Left = 24
+          Top = 92
+          Width = 31
+          Height = 13
+          Caption = #1040#1076#1088#1077#1089
+        end
+        object Label3: TLabel
+          Left = 24
+          Top = 60
+          Width = 49
+          Height = 13
+          Caption = #1060#1072#1084#1080#1083#1080#1103
+        end
+        object Label9: TLabel
+          Left = 395
+          Top = 156
+          Width = 134
+          Height = 13
+          Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1081' '#1090#1077#1083#1077#1092#1086#1085
+        end
+        object Label1: TLabel
+          Left = 299
+          Top = 8
+          Width = 158
+          Height = 13
+          Caption = #1055#1086#1083#1085#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1082#1083#1080#1077#1085#1090#1077
+        end
+        object DBEditEh1: TDBEditEh
+          Left = 96
+          Top = 24
+          Width = 121
+          Height = 21
+          DataField = 'FirstName'
+          DataSource = DataSource1
+          DynProps = <>
+          EditButtons = <>
+          TabOrder = 0
+          Visible = True
+        end
+        object DBEditEh2: TDBEditEh
+          Left = 96
+          Top = 56
+          Width = 121
+          Height = 21
+          DataField = 'Surname'
+          DataSource = DataSource1
+          DynProps = <>
+          EditButtons = <>
+          TabOrder = 1
+          Visible = True
+        end
+        object DBEditEh3: TDBEditEh
+          Left = 96
+          Top = 88
+          Width = 281
+          Height = 21
+          DataField = 'Address'
+          DataSource = DataSource1
+          DynProps = <>
+          EditButtons = <>
+          ReadOnly = True
+          TabOrder = 2
+          Visible = True
+        end
+        object DBEditEh4: TDBEditEh
+          Left = 544
+          Top = 88
+          Width = 273
+          Height = 21
+          DataField = 'Address2'
+          DataSource = DataSource1
+          DynProps = <>
+          EditButtons = <>
+          ReadOnly = True
+          TabOrder = 3
+          Visible = True
+        end
+        object DBEditEh5: TDBEditEh
+          Left = 96
+          Top = 120
+          Width = 281
+          Height = 21
+          DataField = 'Email'
+          DataSource = DataSource1
+          DynProps = <>
+          EditButtons = <>
+          ReadOnly = True
+          TabOrder = 4
+          Visible = True
+        end
+        object DBEditEh6: TDBEditEh
+          Left = 544
+          Top = 120
+          Width = 273
+          Height = 21
+          DataField = 'Email2'
+          DataSource = DataSource1
+          DynProps = <>
+          EditButtons = <>
+          ReadOnly = True
+          TabOrder = 5
+          Visible = True
+        end
+        object DBEditEh7: TDBEditEh
+          Left = 96
+          Top = 152
+          Width = 281
+          Height = 21
+          DataField = 'Phone'
+          DataSource = DataSource1
+          DynProps = <>
+          EditButtons = <>
+          ReadOnly = True
+          TabOrder = 6
+          Visible = True
+        end
+        object DBEditEh8: TDBEditEh
+          Left = 544
+          Top = 152
+          Width = 273
+          Height = 21
+          DataField = 'Phone2'
+          DataSource = DataSource1
+          DynProps = <>
+          EditButtons = <>
+          ReadOnly = True
+          TabOrder = 7
+          Visible = True
+        end
+      end
     end
   end
   object Button1: TButton
@@ -70,6 +245,7 @@ object ClientListForm: TClientListForm
     Height = 25
     Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1082#1083#1080#1077#1085#1090#1072
     TabOrder = 4
+    OnClick = Button4Click
   end
   object ADODataDriverEh1: TADODataDriverEh
     ConnectionString = 
@@ -81,26 +257,124 @@ object ClientListForm: TClientListForm
       'select * from clients')
     SelectCommand.Parameters = <>
     UpdateCommand.CommandText.Strings = (
-      'update vendors'
+      'update clients'
       'set'
-      '  FirstName = :FirstName'
+      '  FirstName = :FirstName,'
+      '  SurName = :SurName'
       'where'
-      '  VendorNo = :OLD_VendorNo')
+      '  id = :OLD_id')
     UpdateCommand.Parameters = <
       item
         Name = 'FirstName'
-        Size = -1
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
         Value = Null
       end
       item
-        Name = 'OLD_VendorNo'
-        Size = -1
+        Name = 'SurName'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'OLD_id'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
         Value = Null
       end>
-    InsertCommand.Parameters = <>
+    InsertCommand.CommandText.Strings = (
+      'insert into clients'
+      
+        '  (FirstName,SurName, Address1, Address2, Email, Email2, Phone, ' +
+        'Phone2)'
+      'values'
+      
+        '  (:FirstName, :SurName, :Address2, :Address2, :Email, :Email2, ' +
+        ':Phone, :Phone2)')
+    InsertCommand.Parameters = <
+      item
+        Name = 'FirstName'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'SurName'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Address2'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Address2'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Email'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Email2'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Phone'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end
+      item
+        Name = 'Phone2'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
     DeleteCommand.CommandText.Strings = (
-      'delete from clients where id = :OLD_id'
-      '')
+      'delete from clients where id = :OLD_id')
     DeleteCommand.Parameters = <
       item
         Name = 'OLD_id'
@@ -129,6 +403,7 @@ object ClientListForm: TClientListForm
   end
   object MemTableEh1: TMemTableEh
     Active = True
+    AutoCalcFields = False
     FieldDefs = <
       item
         Name = 'ID'

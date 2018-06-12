@@ -7,7 +7,8 @@ uses
   Dialogs, MemTableDataEh, Db, ADODB, DBGridEhGrouping, ToolCtrlsEh,
   EhLibADO,
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
-  MemTableEh, DataDriverEh, ADODataDriverEh, StdCtrls;
+  MemTableEh, DataDriverEh, ADODataDriverEh, StdCtrls, Mask, DBCtrlsEh,
+  ExtCtrls;
 
 type
   TClientListForm = class(TForm)
@@ -20,6 +21,24 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    DBEditEh1: TDBEditEh;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    DBEditEh2: TDBEditEh;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    DBEditEh3: TDBEditEh;
+    DBEditEh4: TDBEditEh;
+    DBEditEh5: TDBEditEh;
+    DBEditEh6: TDBEditEh;
+    DBEditEh7: TDBEditEh;
+    DBEditEh8: TDBEditEh;
+    Panel1: TPanel;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -30,6 +49,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -174,9 +194,11 @@ begin
   //clientEditForm1:=Form1.Create(Application);
   //Application.CreateForm(TClientEditForm, ClientEditForm);
   clientEditForm:=TClientEditForm.Create(Application);
+  MemTableEh1.Edit;
   clientEditForm.ShowModal;
-  if clientEditForm.ModalResult = mrOk then;
-  //ADOQuery1.Post;
+  if clientEditForm.ModalResult = mrOk then
+     MemTableEh1.Post;
+   //ADOQuery1.Post;
   clientEditForm.Free;
 end;
 
@@ -209,6 +231,17 @@ procedure TClientListForm.FormActivate(Sender: TObject);
 begin
   //Инициализация грида
   SetGridButton;
+end;
+
+procedure TClientListForm.Button4Click(Sender: TObject);
+begin
+  clientEditForm:=TClientEditForm.Create(Application);
+  MemTableEh1.Insert;
+  clientEditForm.ShowModal;
+  if clientEditForm.ModalResult = mrOk then
+     MemTableEh1.Post;
+  //ADOQuery1.Post;
+  clientEditForm.Free;
 end;
 
 end.

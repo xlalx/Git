@@ -68,7 +68,6 @@ begin
   Edit7.Text := ClientListForm.DBGridEh1.FieldColumns['Phone'].DisplayText;
   Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Phone2'].DisplayText;
   //ClientListForm.MemTableEh1.
-  ClientListForm.MemTableEh1.Edit;
 end;
 
 procedure TClientEditForm.Edit1KeyPress(Sender: TObject; var Key: Char);
@@ -123,20 +122,25 @@ procedure TClientEditForm.Button1Click(Sender: TObject);
 begin
   //ClientListForm.DBGridEh1.FieldColumns['FirstName'].DisplayText := Edit1.Text;
   //ClientListForm.DBGridEh1.FieldColumns['FirstName'].
-  ClientListForm.MemTableEh1.Post;
-  ClientListForm.MemTableEh1.Close;
-  ClientListForm.MemTableEh1.Open;
+  {with ClientListForm.MemTableEh1 do
+    begin
+      Post;
+      Close;
+      Open;
+    end;}
+  clientEditForm.close;
 end;
 
 procedure TClientEditForm.Button2Click(Sender: TObject);
 begin
-    ClientListForm.MemTableEh1.Cancel;
+   //ClientListForm.MemTableEh1.Cancel;
+   clientEditForm.close;
 end;
 
 procedure TClientEditForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  ClientListForm.MemTableEh1.Cancel;
+   clientListForm.MemTableEh1.Cancel;
 end;
 
 end.
