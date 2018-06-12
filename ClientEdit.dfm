@@ -1,6 +1,6 @@
 object ClientEditForm: TClientEditForm
-  Left = 335
-  Top = 211
+  Left = 460
+  Top = 332
   Width = 683
   Height = 305
   Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1085#1080#1077' '#1079#1072#1087#1080#1089#1080
@@ -83,6 +83,7 @@ object ClientEditForm: TClientEditForm
     Width = 209
     Height = 21
     TabOrder = 0
+    OnKeyPress = Edit1KeyPress
   end
   object Edit2: TEdit
     Left = 88
@@ -90,6 +91,7 @@ object ClientEditForm: TClientEditForm
     Width = 209
     Height = 21
     TabOrder = 1
+    OnKeyPress = Edit2KeyPress
   end
   object Edit3: TEdit
     Left = 88
@@ -97,6 +99,7 @@ object ClientEditForm: TClientEditForm
     Width = 209
     Height = 21
     TabOrder = 2
+    OnKeyPress = Edit3KeyPress
   end
   object Edit4: TEdit
     Left = 448
@@ -104,6 +107,7 @@ object ClientEditForm: TClientEditForm
     Width = 209
     Height = 21
     TabOrder = 3
+    OnKeyPress = Edit4KeyPress
   end
   object Edit5: TEdit
     Left = 88
@@ -111,6 +115,7 @@ object ClientEditForm: TClientEditForm
     Width = 209
     Height = 21
     TabOrder = 4
+    OnKeyPress = Edit5KeyPress
   end
   object Edit6: TEdit
     Left = 448
@@ -118,6 +123,7 @@ object ClientEditForm: TClientEditForm
     Width = 209
     Height = 21
     TabOrder = 5
+    OnKeyPress = Edit6KeyPress
   end
   object Edit7: TEdit
     Left = 88
@@ -125,6 +131,7 @@ object ClientEditForm: TClientEditForm
     Width = 209
     Height = 21
     TabOrder = 6
+    OnKeyPress = Edit7KeyPress
   end
   object Edit8: TEdit
     Left = 448
@@ -132,6 +139,7 @@ object ClientEditForm: TClientEditForm
     Width = 209
     Height = 21
     TabOrder = 7
+    OnKeyPress = Edit8KeyPress
   end
   object Button1: TButton
     Left = 88

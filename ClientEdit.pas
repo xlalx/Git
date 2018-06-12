@@ -30,6 +30,14 @@ type
     Button1: TButton;
     Button2: TButton;
     procedure FormCreate(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit4KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit5KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit6KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit7KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit8KeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -47,9 +55,6 @@ uses ClientList;
 
 procedure TClientEditForm.FormCreate(Sender: TObject);
 begin
-  //ADODataDriverEh1.SelectSQL. :='select * from clients where id = '+
-  //                 ClientListForm.DBGridEh1.FieldColumns['id'].DisplayText;
-  //Edit1.Text := ClientListForm.DBGridEh1.FieldColumns['FirstName'].DisplayText;
   Edit1.Text := ClientListForm.DBGridEh1.FieldColumns['FirstName'].DisplayText;
   Edit2.Text := ClientListForm.DBGridEh1.FieldColumns['SurName'].DisplayText;
   Edit3.Text := ClientListForm.DBGridEh1.FieldColumns['Address'].DisplayText;
@@ -58,6 +63,54 @@ begin
   Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Email2'].DisplayText;
   Edit7.Text := ClientListForm.DBGridEh1.FieldColumns['Phone'].DisplayText;
   Edit6.Text := ClientListForm.DBGridEh1.FieldColumns['Phone2'].DisplayText;        
+end;
+
+procedure TClientEditForm.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if (Key = Char(VK_RETURN)) and (length(Edit1.Text) > 0) then
+     Edit2.SetFocus;
+end;
+
+procedure TClientEditForm.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+  if (Key = Char(VK_RETURN)) and (length(Edit2.Text) > 0) then
+     Edit3.SetFocus;
+end;
+
+procedure TClientEditForm.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+  if (Key = Char(VK_RETURN)) and (length(Edit3.Text) > 0) then
+     Edit4.SetFocus;
+end;
+
+procedure TClientEditForm.Edit4KeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = Char(VK_RETURN) then
+     Edit5.SetFocus;
+end;
+
+procedure TClientEditForm.Edit5KeyPress(Sender: TObject; var Key: Char);
+begin
+  if (Key = Char(VK_RETURN)) and (length(Edit5.Text) > 0) then
+     Edit6.SetFocus;
+end;
+
+procedure TClientEditForm.Edit6KeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = Char(VK_RETURN) then
+     Edit7.SetFocus;
+end;
+
+procedure TClientEditForm.Edit7KeyPress(Sender: TObject; var Key: Char);
+begin
+  if (Key = Char(VK_RETURN)) and (length(Edit7.Text) > 0) then
+     Edit8.SetFocus;
+end;
+
+procedure TClientEditForm.Edit8KeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = Char(VK_RETURN) then
+     Button1.SetFocus;
 end;
 
 end.
