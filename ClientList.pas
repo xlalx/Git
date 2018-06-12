@@ -60,7 +60,7 @@ type
 
 //Количество записей, при которых таблица считается пустой
 const
-  EMPTYTABLE=4;
+  EMPTYTABLE=6;
 
 var
   ClientListForm: TClientListForm;
@@ -192,13 +192,6 @@ procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
   clientEditForm.ShowModal;
-  //if clientEditForm.ModalResult = mrOk then
-  //   begin
-       MemTableEh1.Post;
-       MemTableEh1.Active:=false;
-       MemTableEh1.Active:=true;
-  //     MemTableEh1.Open;
-  //  end;
   clientEditForm.Free;
 end;
 
@@ -208,23 +201,9 @@ begin
   buttonSel := MessageDlg('Вы уверены, что хотите удалить клиента?',mtCustom, mbOKCancel, 0);
   if buttonSel = mrOK then
      begin
-        //ADODataDriverEh1.DeleteSQL[0]:=ADODataDriverEh1.DeleteSQL[0]+DBGridEh1.FieldColumns['id'].DisplayText;
         MemTableEh1.Delete;
      end;
   SetGridButton;
-{
-try
-if Query1.Active then Close;
-Query1.SQL.Clear; //типа очищаем свойство в котором текст запроса хранится
-
-Query1.Sql.Add("delete * from your_table where field="+
-DBGrid1.Fields[0].AsString); //здесь подставляя первый столбец DBGrid"a выделенной курсором строки и выполняя эту команду ты удаляешь строку в таблице. Свойство Fields нумеруется с нуля.
-Query1.ExecSQL;//Метод специально предназначен для Delete или Insert, т.е. он не возвращает результатов
-except
-on E:Exception do
-ShowMessage(E.Message);
-end;
-}
 end;
 
 procedure TClientListForm.FormActivate(Sender: TObject);
@@ -236,16 +215,10 @@ end;
 procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
-  MemTableEh1.Insert;
+  MemTableEh1.Append;
   clientEditForm.ShowModal;
-//  if clientEditForm.ModalResult = mrOk then
-//    begin
-//     MemTableEh1.Post;
-//    end;
-  MemTableEh1.Post;
-  MemTableEh1.Active:=false;
-  MemTableEh1.Active:=true;
   clientEditForm.Free;
+  SetGridButton;
 end;
 
 end.

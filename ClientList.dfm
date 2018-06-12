@@ -268,7 +268,7 @@ object ClientListForm: TClientListForm
       '  Address = :Address,'
       '  Address2 = :Address2,'
       '  Email = :Email,'
-      '  Email2 = :Email,'
+      '  Email2 = :Email2,'
       '  Phone = :Phone,'
       '  Phone2 = :Phone2'
       'where'
@@ -320,7 +320,7 @@ object ClientListForm: TClientListForm
         Value = Null
       end
       item
-        Name = 'Email'
+        Name = 'Email2'
         Attributes = [paNullable]
         DataType = ftWideString
         NumericScale = 255

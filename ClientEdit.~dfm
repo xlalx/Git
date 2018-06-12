@@ -12,7 +12,6 @@ object ClientEditForm: TClientEditForm
   Font.Style = []
   OldCreateOrder = False
   OnClose = FormClose
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
