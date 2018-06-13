@@ -8,7 +8,8 @@ uses
   EhLibADO,
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   MemTableEh, DataDriverEh, ADODataDriverEh, StdCtrls, Mask, DBCtrlsEh,
-  ExtCtrls;
+  ExtCtrls, ComCtrls, IdBaseComponent, IdComponent, IdTCPConnection,
+  IdTCPClient, IdHTTP;
 
 type
   TClientListForm = class(TForm)
@@ -39,6 +40,12 @@ type
     DBEditEh7: TDBEditEh;
     DBEditEh8: TDBEditEh;
     Panel1: TPanel;
+    Panel2: TPanel;
+    DateTimePicker1: TDateTimePicker;
+    ComboBox1: TComboBox;
+    Label10: TLabel;
+    IdHTTP1: TIdHTTP;
+    Label11: TLabel;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -50,17 +57,20 @@ type
     procedure Button3Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure DateTimePicker1Change(Sender: TObject);
   private
     { Private declarations }
-  public
-    { Public declarations }
+    procedure DisplayCurrency;
     procedure SetGridColumn;
     procedure SetGridButton;
+  public
+    { Public declarations }
   end;
 
 //Количество записей, при которых таблица считается пустой
 const
-  EMPTYTABLE=4;
+  EMPTYTABLE=6;
 
 var
   ClientListForm: TClientListForm;
@@ -142,6 +152,57 @@ begin
   Button2.Enabled := Button3.Enabled;
 end;
 
+procedure TClientListForm.DisplayCurrency;
+  var
+     getUrl,
+     getStr   : string;
+     iPos     : integer;
+     strCurrency,
+     strCnt   : string;
+begin
+   // http://www.nbrb.by/API/ExRates/Rates/145?onDate=2016-7-5
+   // {"Cur_ID":145,"Date":"2016-07-05T00:00:00","Cur_Abbreviation":"USD","Cur_Scale":1,"Cur_Name":"Доллар США","Cur_OfficialRate":1.9979}
+   getUrl:='http://www.nbrb.by/API/ExRates/Rates/';
+   // Формирование кодов валют
+   // США - 145 РУР - 298 Евро 292
+   case ComboBox1.ItemIndex of
+     0:
+       begin
+         getUrl := getUrl + '298';
+         strCnt := 'бел. рублей за 100 рос.рублей';
+       end;
+     1:
+       begin
+         getUrl := getUrl + '145';
+         strCnt := 'бел. рублей за 1 доллар США';
+       end;
+     2:
+       begin
+         getUrl := getUrl + '292';
+         strCnt := 'бел. рублей за 1 Евро';
+       end;
+   end;
+   Label1.Caption := 'Загрузка курса валют....';
+   // http://www.nbrb.by/API/ExRates/Rates/298?onDate=2016-7-5
+   // url := url + '?onDate='+FormatDateTime('YYYY-MM-DD',DBDateTimeEditEh1.Value);
+   // url := url + '?onDate='+ FormatDateTime('YYYY-MM-DD',DateTimePicker1.Date);
+   getUrl := getUrl + '?onDate='+ FormatDateTime('YYYY-MM-DD',DateTimePicker1.Date);
+   try
+      getStr:=IdHTTP1.get(getUrl);  //скачиваем код страницы
+   except
+      On E: Exception do
+         begin
+           Label10.Caption := 'Ошибка при получении курса валют';
+           ShowMessage(Label1.Caption+' '+E.Message);
+           Exit;
+         end;
+   end;
+   // Обработка Курс
+   iPos := pos('Cur_OfficialRate',getStr);
+   strCurrency := copy(getStr,iPos+length('Cur_OfficialRate')+2,6);
+   Label10.Caption := strCurrency+' '+strCnt;
+end;
+
 procedure TClientListForm.MemTableEh1AfterOpen(DataSet: TDataSet);
 begin
  SetGridColumn;
@@ -153,6 +214,8 @@ begin
   //Инициализация грида
   SetGridColumn;
   DBGridEh1.SaveColumnsLayoutIni(FileNameIni, 'ClientListForm_DBGridEh1',true);
+  //Курс валют
+  DisplayCurrency;
 end;
 
 procedure TClientListForm.FormDestroy(Sender: TObject);
@@ -192,13 +255,6 @@ procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
   clientEditForm.ShowModal;
-  //if clientEditForm.ModalResult = mrOk then
-  //   begin
-       MemTableEh1.Post;
-       MemTableEh1.Active:=false;
-       MemTableEh1.Active:=true;
-  //     MemTableEh1.Open;
-  //  end;
   clientEditForm.Free;
 end;
 
@@ -208,23 +264,9 @@ begin
   buttonSel := MessageDlg('Вы уверены, что хотите удалить клиента?',mtCustom, mbOKCancel, 0);
   if buttonSel = mrOK then
      begin
-        //ADODataDriverEh1.DeleteSQL[0]:=ADODataDriverEh1.DeleteSQL[0]+DBGridEh1.FieldColumns['id'].DisplayText;
         MemTableEh1.Delete;
      end;
   SetGridButton;
-{
-try
-if Query1.Active then Close;
-Query1.SQL.Clear; //типа очищаем свойство в котором текст запроса хранится
-
-Query1.Sql.Add("delete * from your_table where field="+
-DBGrid1.Fields[0].AsString); //здесь подставляя первый столбец DBGrid"a выделенной курсором строки и выполняя эту команду ты удаляешь строку в таблице. Свойство Fields нумеруется с нуля.
-Query1.ExecSQL;//Метод специально предназначен для Delete или Insert, т.е. он не возвращает результатов
-except
-on E:Exception do
-ShowMessage(E.Message);
-end;
-}
 end;
 
 procedure TClientListForm.FormActivate(Sender: TObject);
@@ -236,16 +278,20 @@ end;
 procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
-  MemTableEh1.Insert;
+  MemTableEh1.Append;
   clientEditForm.ShowModal;
-//  if clientEditForm.ModalResult = mrOk then
-//    begin
-//     MemTableEh1.Post;
-//    end;
-  MemTableEh1.Post;
-  MemTableEh1.Active:=false;
-  MemTableEh1.Active:=true;
   clientEditForm.Free;
+  SetGridButton;
+end;
+
+procedure TClientListForm.ComboBox1Change(Sender: TObject);
+begin
+ DisplayCurrency;
+end;
+
+procedure TClientListForm.DateTimePicker1Change(Sender: TObject);
+begin
+ DisplayCurrency;
 end;
 
 end.

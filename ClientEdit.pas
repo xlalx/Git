@@ -139,7 +139,7 @@ begin
   except
      on E:Exception Do
       begin
-        ShowMessage('Ошибка при работк с БД '+e.Message)
+        ShowMessage('Ошибка при работе с БД '+e.Message)
       end
   end;
   clientEditForm.close;

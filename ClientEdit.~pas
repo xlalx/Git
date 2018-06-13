@@ -131,9 +131,17 @@ begin
        Exit;
     end;
   // Запись информации и переоткрытие таблицы
-  ClientListForm.MemTableEh1.Post;
-  ClientListForm.MemTableEh1.Close;
-  ClientListForm.MemTableEh1.Open;
+  try
+    begin
+     ClientListForm.MemTableEh1.Post;
+     ClientListForm.MemTableEh1.ApplyUpdates(-1);
+    end
+  except
+     on E:Exception Do
+      begin
+        ShowMessage('Ошибка при работк с БД '+e.Message)
+      end
+  end;
   clientEditForm.close;
 end;
 

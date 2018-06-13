@@ -249,6 +249,51 @@ object ClientListForm: TClientListForm
     TabOrder = 4
     OnClick = Button4Click
   end
+  object Panel2: TPanel
+    Left = 320
+    Top = 0
+    Width = 569
+    Height = 41
+    TabOrder = 5
+    object Label10: TLabel
+      Left = 376
+      Top = 8
+      Width = 3
+      Height = 13
+    end
+    object Label11: TLabel
+      Left = 8
+      Top = 8
+      Width = 66
+      Height = 25
+      Caption = #1050#1091#1088#1089#1099' '#1074#1072#1083#1102#1090
+    end
+    object DateTimePicker1: TDateTimePicker
+      Left = 96
+      Top = 8
+      Width = 129
+      Height = 21
+      Date = 43264.630972581020000000
+      Time = 43264.630972581020000000
+      TabOrder = 0
+      OnChange = DateTimePicker1Change
+    end
+    object ComboBox1: TComboBox
+      Left = 232
+      Top = 8
+      Width = 129
+      Height = 21
+      ItemHeight = 13
+      ItemIndex = 1
+      TabOrder = 1
+      Text = #1044#1086#1083#1083#1072#1088#1099' '#1057#1064#1040
+      OnChange = ComboBox1Change
+      Items.Strings = (
+        #1056#1086#1089#1089'. '#1088#1091#1073#1083#1080
+        #1044#1086#1083#1083#1072#1088#1099' '#1057#1064#1040
+        #1045#1074#1088#1086)
+    end
+  end
   object ADODataDriverEh1: TADODataDriverEh
     ConnectionString = 
       'Provider=Microsoft.ACE.OLEDB.12.0;Data Source=clients.accdb;Pers' +
@@ -270,7 +315,8 @@ object ClientListForm: TClientListForm
       '  Email = :Email,'
       '  Email2 = :Email2,'
       '  Phone = :Phone,'
-      '  Phone2 = :Phone2'
+      '  Phone2 = :Phone2,'
+      '  ChangeDate = Date()'
       'where'
       '  id = :OLD_id')
     UpdateCommand.Parameters = <
@@ -540,6 +586,23 @@ object ClientListForm: TClientListForm
     StoreDefs = True
     AfterOpen = MemTableEh1AfterOpen
     Left = 648
+    Top = 424
+  end
+  object IdHTTP1: TIdHTTP
+    MaxLineAction = maException
+    ReadTimeout = 0
+    AllowCookies = True
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = 0
+    Request.ContentRangeStart = 0
+    Request.ContentType = 'text/html'
+    Request.Accept = 'text/html, */*'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 816
     Top = 424
   end
 end
