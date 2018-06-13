@@ -9,7 +9,7 @@ uses
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   MemTableEh, DataDriverEh, ADODataDriverEh, StdCtrls, Mask, DBCtrlsEh,
   ExtCtrls, ComCtrls, IdBaseComponent, IdComponent, IdTCPConnection,
-  IdTCPClient, IdHTTP;
+  IdTCPClient, IdHTTP, frxClass, frxDBSet;
 
 type
   TClientListForm = class(TForm)
@@ -46,6 +46,9 @@ type
     Label10: TLabel;
     IdHTTP1: TIdHTTP;
     Label11: TLabel;
+    frxDBDataset1: TfrxDBDataset;
+    frxReport1: TfrxReport;
+    Button5: TButton;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -59,6 +62,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure DateTimePicker1Change(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
   private
     { Private declarations }
     procedure DisplayCurrency;
@@ -293,6 +297,11 @@ end;
 procedure TClientListForm.DateTimePicker1Change(Sender: TObject);
 begin
  DisplayCurrency;
+end;
+
+procedure TClientListForm.Button5Click(Sender: TObject);
+begin
+  frxReport1.ShowReport;
 end;
 
 end.

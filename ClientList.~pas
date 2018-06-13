@@ -254,6 +254,7 @@ end;
 procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
+  MemTableEh1.Edit;
   clientEditForm.ShowModal;
   clientEditForm.Free;
 end;

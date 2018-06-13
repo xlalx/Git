@@ -315,7 +315,8 @@ object ClientListForm: TClientListForm
       '  Email = :Email,'
       '  Email2 = :Email2,'
       '  Phone = :Phone,'
-      '  Phone2 = :Phone2'
+      '  Phone2 = :Phone2,'
+      '  ChangeDate = Date()'
       'where'
       '  id = :OLD_id')
     UpdateCommand.Parameters = <
