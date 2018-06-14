@@ -9,7 +9,7 @@ uses
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   MemTableEh, DataDriverEh, ADODataDriverEh, StdCtrls, Mask, DBCtrlsEh,
   ExtCtrls, ComCtrls, IdBaseComponent, IdComponent, IdTCPConnection,
-  IdTCPClient, IdHTTP, frxClass, frxDBSet;
+  IdTCPClient, IdHTTP, frxClass, frxDBSet, frxADOComponents, frxDCtrl;
 
 type
   TClientListForm = class(TForm)
@@ -46,9 +46,11 @@ type
     Label10: TLabel;
     IdHTTP1: TIdHTTP;
     Label11: TLabel;
-    frxDBDataset1: TfrxDBDataset;
     frxReport1: TfrxReport;
     Button5: TButton;
+    frxDialogControls1: TfrxDialogControls;
+    frxADOComponents1: TfrxADOComponents;
+    ADOConnection1: TADOConnection;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);

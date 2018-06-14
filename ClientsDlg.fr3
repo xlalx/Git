@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Version="6.0.10" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="Ïî óìîë÷àíèþ" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43265,4934195949" ReportOptions.Description.Text="" ReportOptions.LastChange="43265,5789100463" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="ADOQuery1" DataSetName="ADOQuery1"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000">
+    <TfrxADOQuery Name="ADOQuery1" UserName="ADOQuery1" CloseDataSource="True" FieldAliases.Text="" BCDToCurrency="False" IgnoreDupParams="False" SQL.Text="SELECT C.FirstName, C.Surname, C.ChangeDate                             &#13;&#10;FROM&#13;&#10;    Clients C&#13;&#10;WHERE C.ChangeDate between :p1 and :p2&#13;&#10;ORDER BY C.ChangeDate                             " SQLSchema="eAGLdkksSXRKLE6N5eUKDvSxNTSwMDM0NbCwMOTlig5JTMpJLQbKONs652Sm5pUU6xiagpCRgQGQMgAqcS/KTAEqMLB1yywqLvFLzE3VgSl11jHUMQBDXi5D2+DSojxcstE+mXnZIHsA6fYm7A==" CommandTimeout="30" LockType="ltReadOnly" PropData="05704C65667402200470546F7002100A506172616D657465727301010C38000000204E616D653D227031222044617461547970653D22667444617465222045787072657373696F6E3D224461746545646974312E446174652200010C38000000204E616D653D227032222044617461547970653D22667444617465222045787072657373696F6E3D224461746545646974322E44617465220000"/>
+  </TfrxDataPage>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" HGuides.Text="" VGuides.Text="">
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="18,89765" Left="0" Top="177,63791" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="ADOQuery1" DataSetName="ADOQuery1" RowCount="0">
+      <TfrxMemoView Name="Memo6" Left="0" Top="0" Width="215,43321" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="15" ParentFont="False" Text="[ADOQuery1.&#34;FirstName&#34;]"/>
+      <TfrxMemoView Name="Memo7" Left="215,43321" Top="0" Width="370,39394" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="15" ParentFont="False" Text="[ADOQuery1.&#34;Surname&#34;]"/>
+      <TfrxMemoView Name="Memo8" Left="585,82715" Top="0" Width="132,28355" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="15" ParentFont="False" Text="[ADOQuery1.&#34;ChangeDate&#34;]"/>
+    </TfrxMasterData>
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="98,26778" Left="0" Top="18,89765" Width="718,1107">
+      <TfrxMemoView Name="Memo2" Left="30,23624" Top="18,89765" Width="347,71676" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="ÐžÑ‚Ñ‡ÐµÑ‚ Ð¿Ð¾ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð°Ð¼, Ð¸Ð·Ð¼ÐµÐ½Ð½Ñ‹Ð¼ Ð·Ð° Ð¿ÐµÑ€Ð¸Ð¾Ð´ Ñ"/>
+      <TfrxMemoView Name="Memo1" Left="377,953" Top="18,89765" Width="113,3859" Height="18,89765" DisplayFormat.FormatStr="dd mmmm yyyy" DisplayFormat.Kind="fkDateTime" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="[DateEdit1.Date]"/>
+      <TfrxMemoView Name="Memo4" Left="491,3389" Top="18,89765" Width="22,67718" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="Ð¿Ð¾"/>
+      <TfrxMemoView Name="Memo5" Left="514,01608" Top="18,89765" Width="128,50402" Height="18,89765" DisplayFormat.FormatStr="dd mmmm yyyy" DisplayFormat.Kind="fkDateTime" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Text="[DateEdit2.Date]"/>
+      <TfrxMemoView Name="Memo9" Left="0" Top="68,03154" Width="215,43321" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Frame.Width="2" ParentFont="False" Text="Ð˜Ð¼Ñ"/>
+      <TfrxMemoView Name="Memo10" Left="215,43321" Top="68,03154" Width="370,39394" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Frame.Width="2" ParentFont="False" Text="Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ"/>
+      <TfrxMemoView Name="Memo11" Left="585,82715" Top="68,03154" Width="132,28355" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Frame.Width="2" ParentFont="False" Text="Ð”Ð°Ñ‚Ð° Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ"/>
+    </TfrxReportTitle>
+  </TfrxReportPage>
+  <TfrxDialogPage Name="DialogPage1" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Tahoma" Font.Style="0" BorderStyle="bsDialog" DoubleBuffered="False" Height="223" ClientHeight="189" Left="392" Top="238" Width="387" Scaled="True" ClientWidth="379">
+    <TfrxLabelControl Name="Label1" Left="120" Top="48" Width="131" Height="16" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Tahoma" Font.Style="0" ParentFont="False" ShowHint="True" Caption="Ââåäèòå äèàïàçîí äàò" Color="-16777201"/>
+    <TfrxLabelControl Name="Label2" Left="36" Top="12" Width="289" Height="16" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Tahoma" Font.Style="1" ParentFont="False" ShowHint="True" Caption="Îò÷åò ïî êëèåíòàì, èçìåíåííûõ çà ïåðèîä" Color="-16777201"/>
+    <TfrxButtonControl Name="Button1" Left="76" Top="132" Width="75" Height="25" ShowHint="True" Caption="Îò÷åò" Default="True" ModalResult="1"/>
+    <TfrxButtonControl Name="Button2" Left="244" Top="132" Width="75" Height="25" ShowHint="True" Caption="Îòìåíà" ModalResult="2"/>
+    <TfrxDateEditControl Name="DateEdit1" Left="44" Top="72" Width="133" Height="21" ShowHint="True" Color="-16777211" Date="43265" Time="43265" WeekNumbers="False"/>
+    <TfrxDateEditControl Name="DateEdit2" Left="224" Top="72" Width="129" Height="21" ShowHint="True" Color="-16777211" Date="43265" Time="43265" WeekNumbers="False"/>
+    <TfrxLabelControl Name="Label3" Left="28" Top="76" Width="5" Height="13" ShowHint="True" Caption="c" Color="-16777201"/>
+    <TfrxLabelControl Name="Label4" Left="192" Top="76" Width="12" Height="13" ShowHint="True" Caption="ïî" Color="-16777201"/>
+  </TfrxDialogPage>
+</TfrxReport>
