@@ -631,7 +631,7 @@ object ClientListForm: TClientListForm
     PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43264.661805555600000000
-    ReportOptions.LastChange = 43264.673305844910000000
+    ReportOptions.LastChange = 43264.708891782410000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -643,12 +643,40 @@ object ClientListForm: TClientListForm
       item
         DataSet = frxDBDataset1
         DataSetName = 'frxDBDataset1'
+      end
+      item
+        DataSet = frxReport1.ADOQuery1
+        DataSetName = 'ADOQuery1'
       end>
     Variables = <>
     Style = <>
     object Data: TfrxDataPage
       Height = 1000.000000000000000000
       Width = 1000.000000000000000000
+      object ADOQuery1: TfrxADOQuery
+        UserName = 'ADOQuery1'
+        CloseDataSource = True
+        BCDToCurrency = False
+        IgnoreDupParams = False
+        Params = <>
+        SQL.Strings = (
+          
+            'select * from clients                                           ' +
+            '  ')
+        CommandTimeout = 30
+        LockType = ltReadOnly
+        pLeft = 40
+        pTop = 36
+        Parameters = <>
+      end
+      object ADODatabase1: TfrxADODatabase
+        DatabaseName = 
+          'Provider=Microsoft.ACE.OLEDB.12.0;Data Source=clients.accdb;Pers' +
+          'ist Security Info=False;User ID=;Password='
+        LoginPrompt = False
+        pLeft = 100
+        pTop = 36
+      end
     end
     object Page1: TfrxReportPage
       PaperWidth = 210.000000000000000000
@@ -663,7 +691,7 @@ object ClientListForm: TClientListForm
         FillType = ftBrush
         Frame.Typ = []
         Height = 56.692950000000000000
-        Top = 18.897650000000000000
+        Top = 16.000000000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
           Left = 170.078850000000000000
@@ -672,9 +700,9 @@ object ClientListForm: TClientListForm
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -16
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8 = (
@@ -685,12 +713,12 @@ object ClientListForm: TClientListForm
           Left = 7.559060000000000000
           Top = 34.015770000000000000
           Width = 181.417440000000000000
-          Height = 18.897650000000000000
+          Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
@@ -700,13 +728,13 @@ object ClientListForm: TClientListForm
         object Memo3: TfrxMemoView
           Left = 188.976500000000000000
           Top = 34.015770000000000000
-          Width = 139.842610000000000000
-          Height = 18.897650000000000000
+          Width = 102.047310000000000000
+          Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
@@ -714,27 +742,43 @@ object ClientListForm: TClientListForm
           ParentFont = False
         end
         object Memo4: TfrxMemoView
-          Left = 328.819110000000000000
+          Left = 291.023810000000000000
           Top = 34.015770000000000000
-          Width = 385.512060000000000000
-          Height = 18.897650000000000000
+          Width = 275.905690000000000000
+          Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
             #1056#1106#1056#1169#1057#1026#1056#181#1057#1027)
           ParentFont = False
         end
+        object Memo5: TfrxMemoView
+          Left = 566.929500000000000000
+          Top = 34.015770000000000000
+          Width = 151.181200000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8 = (
+            #1056#1118#1056#181#1056#187#1056#181#1057#8222#1056#1109#1056#1029)
+          ParentFont = False
+        end
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 136.063080000000000000
+        Height = 45.354360000000000000
+        Top = 92.000000000000000000
         Width = 718.110700000000000000
         DataSet = frxDBDataset1
         DataSetName = 'frxDBDataset1'
@@ -753,7 +797,6 @@ object ClientListForm: TClientListForm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
           Memo.UTF8 = (
             '[frxDBDataset1."Surname"]')
           ParentFont = False
@@ -761,7 +804,7 @@ object ClientListForm: TClientListForm
         object frxDBDataset1FirstName: TfrxMemoView
           IndexTag = 1
           Left = 188.976500000000000000
-          Width = 139.842610000000000000
+          Width = 102.047310000000000000
           Height = 18.897650000000000000
           DataField = 'FirstName'
           DataSet = frxDBDataset1
@@ -772,15 +815,14 @@ object ClientListForm: TClientListForm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
           Memo.UTF8 = (
             '[frxDBDataset1."FirstName"]')
           ParentFont = False
         end
         object frxDBDataset1Address: TfrxMemoView
           IndexTag = 1
-          Left = 328.819110000000000000
-          Width = 385.511937950000000000
+          Left = 291.023810000000000000
+          Width = 275.905567950000000000
           Height = 18.897650000000000000
           DataField = 'Address'
           DataSet = frxDBDataset1
@@ -791,10 +833,56 @@ object ClientListForm: TClientListForm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
           Memo.UTF8 = (
             '[frxDBDataset1."Address"]')
           ParentFont = False
+        end
+        object frxDBDataset1Phone: TfrxMemoView
+          IndexTag = 1
+          Left = 566.929500000000000000
+          Width = 151.181126770000000000
+          Height = 18.897650000000000000
+          DataField = 'Phone'
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            '[frxDBDataset1."Phone"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 34.015770000000000000
+        Top = 156.000000000000000000
+        Width = 718.110700000000000000
+        object Memo6: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 7.559059999999990000
+          Width = 706.772110000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftTop]
+          Frame.Width = 4.000000000000000000
+          HAlign = haRight
+          Memo.UTF8 = (
+            #1056#1038#1057#8218#1057#1026#1056#176#1056#1029#1056#1105#1057#8224#1056#176' [Page#] '#1056#1105#1056#183' [TotalPages#]')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
         end
       end
     end
