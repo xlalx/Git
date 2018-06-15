@@ -55,16 +55,17 @@ type
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure DBGridEh1SortMarkingChanged(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
     procedure Button4Click(Sender: TObject);
-    procedure ComboBox1Change(Sender: TObject);
-    procedure DateTimePicker1Change(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure DBGridEh1SortMarkingChanged(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure DateTimePicker1CloseUp(Sender: TObject);
+    //procedure DateTimePicker1Change(Sender: TObject);
   private
     { Private declarations }
     procedure DisplayCurrency;
@@ -167,7 +168,6 @@ procedure TClientListForm.DisplayCurrency;
      strCnt   : string;
 begin
    // http://www.nbrb.by/API/ExRates/Rates/145?onDate=2016-7-5
-   // {"Cur_ID":145,"Date":"2016-07-05T00:00:00","Cur_Abbreviation":"USD","Cur_Scale":1,"Cur_Name":"Доллар США","Cur_OfficialRate":1.9979}
    getUrl:='http://www.nbrb.by/API/ExRates/Rates/';
    // Формирование кодов валют
    // США - 145 РУР - 298 Евро 292
@@ -189,27 +189,33 @@ begin
        end;
    end;
    Label10.Caption := 'Загрузка курса валют....';
-   // http://www.nbrb.by/API/ExRates/Rates/298?onDate=2016-7-5
-   // url := url + '?onDate='+FormatDateTime('YYYY-MM-DD',DBDateTimeEditEh1.Value);
-   // url := url + '?onDate='+ FormatDateTime('YYYY-MM-DD',DateTimePicker1.Date);
+   // {"Cur_ID":145,"Date":"2016-07-05T00:00:00","Cur_Abbreviation":"USD","Cur_Scale":1,"Cur_Name":"Доллар США","Cur_OfficialRate":1.9979}
    getUrl := getUrl + '?onDate='+ FormatDateTime('YYYY-MM-DD',DateTimePicker1.Date);
    try
       getStr:=IdHTTP1.get(getUrl);  //скачиваем код страницы
    except
       On E: Exception do
          begin
-           // Необходима доработка исключений????
-           Label10.Caption := 'Ошибка при получении курса валют';
+           // Обработка ответа Not Found
+           if IdHTTP1.ResponseCode = 404 then
+              Label10.Caption := 'Невозможно получить данные о курсе валют'
+           else
+              Label10.Caption := 'Ошибка при получении курса валют';
+           //ShowMessage(Label10.Caption);
            //ShowMessage(Label10.Caption+':'+E.Message);
-           //if E.
-           ShowMessage(Label10.Caption);
            Exit;
          end;
    end;
-   // Обработка Курс
+   //Обработка курса
    iPos := pos('Cur_OfficialRate',getStr);
-   strCurrency := copy(getStr,iPos+length('Cur_OfficialRate')+2,6);
-   Label10.Caption := strCurrency+' '+strCnt;
+   if iPos <> 0 then
+     begin
+      strCurrency := copy(getStr,iPos+length('Cur_OfficialRate')+2,6);
+      Label10.Caption := strCurrency+' '+strCnt;
+     end
+   else
+     Label10.Caption := 'Невозможно обработать информацию о курсе валют';
+     //ShowMessage('Невозможно обработать информацию о курсе валют');
 end;
 
 procedure TClientListForm.MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -243,6 +249,8 @@ begin
   SetGridColumn;
   DBGridEh1.SaveColumnsLayoutIni(FileNameIni, 'ClientListForm_DBGridEh1',true);
   //Курс валют
+  DateTimePicker1.Date:=Now;
+  DateTimePicker1.MaxDate:=Now;
   DisplayCurrency;
 end;
 
@@ -318,14 +326,15 @@ begin
  DisplayCurrency;
 end;
 
-procedure TClientListForm.DateTimePicker1Change(Sender: TObject);
-begin
- DisplayCurrency;
-end;
-
 procedure TClientListForm.Button5Click(Sender: TObject);
 begin
   frxReport1.ShowReport;
 end;
+
+procedure TClientListForm.DateTimePicker1CloseUp(Sender: TObject);
+begin
+  DisplayCurrency;
+end;
+
 
 end.

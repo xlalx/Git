@@ -275,8 +275,9 @@ object ClientListForm: TClientListForm
       Height = 21
       Date = 43264.630972581020000000
       Time = 43264.630972581020000000
+      MinDate = 32874.000000000000000000
       TabOrder = 0
-      OnChange = DateTimePicker1Change
+      OnCloseUp = DateTimePicker1CloseUp
     end
     object ComboBox1: TComboBox
       Left = 232
