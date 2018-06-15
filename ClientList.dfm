@@ -39,7 +39,7 @@ object ClientListForm: TClientListForm
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 836
+        Width = 30
         Height = 185
         Align = alTop
         TabOrder = 0
@@ -305,8 +305,8 @@ object ClientListForm: TClientListForm
   end
   object ADODataDriverEh1: TADODataDriverEh
     ConnectionString = 
-      'Provider=Microsoft.ACE.OLEDB.12.0;Data Source=clients.accdb;Pers' +
-      'ist Security Info=False'
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=clients.mdb;Persist' +
+      ' Security Info=False'
     DynaSQLParams.Options = []
     MacroVars.Macros = <>
     SpecParams.Strings = (
@@ -533,7 +533,6 @@ object ClientListForm: TClientListForm
     Top = 424
   end
   object MemTableEh1: TMemTableEh
-    Active = True
     AutoCalcFields = False
     FieldDefs = <
       item
@@ -601,6 +600,7 @@ object ClientListForm: TClientListForm
     MaxLineAction = maException
     ReadTimeout = 0
     AllowCookies = True
+    HandleRedirects = True
     ProxyParams.BasicAuthentication = False
     ProxyParams.ProxyPort = 0
     Request.ContentLength = -1
@@ -623,12 +623,24 @@ object ClientListForm: TClientListForm
     PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43265.493419594910000000
-    ReportOptions.LastChange = 43265.578910046300000000
+    ReportOptions.LastChange = 43266.469881562500000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      'procedure frxReport1OnRunDialogs(var Result: Boolean);'
+      'begin'
+      '  // '#1048#1085#1080#1094#1080#1072#1083#1080#1079#1072#1094#1080#1103' '#1076#1072#1090
+      
+        '  DateEdit1.Date:=EncodeDate(YearOf(Date),MonthOf(Date),1);     ' +
+        '                                                                ' +
+        ' '
+      '  DateEdit2.Date:=Date;'
+      '  DialogPage1.ShowModal;        '
+      'end;'
+      ''
       'begin'
       ''
       'end.')
+    OnRunDialogs = 'frxReport1OnRunDialogs'
     Left = 688
     Top = 456
     Datasets = <
@@ -985,11 +997,11 @@ object ClientListForm: TClientListForm
   object ADOConnection1: TADOConnection
     Connected = True
     ConnectionString = 
-      'Provider=Microsoft.ACE.OLEDB.12.0;Data Source=clients.accdb;Pers' +
-      'ist Security Info=False'
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=clients.mdb;Persist' +
+      ' Security Info=False'
     LoginPrompt = False
     Mode = cmShareDenyNone
-    Provider = 'Microsoft.ACE.OLEDB.12.0'
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 816
     Top = 456
   end

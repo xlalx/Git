@@ -93,11 +93,11 @@ procedure TClientListForm.ADOConnectionProviderEh1InlineConnectionBeforeConnect(
 var
   FilePath: String;
 begin
-  FilePath := ExtractFilePath(ParamStr(0))+'\clients.accdb';
+  FilePath := ExtractFilePath(ParamStr(0))+'\clients.mdb';
   ADOConnectionProviderEh1.InlineConnection.ConnectionString :=
-    'Provider=Microsoft.ACE.OLEDB.12.0;User ID=Admin;'+
+    'Provider=Microsoft.ACE.OLEDB.4.0;'+
     'Data Source=' + FilePath + ';'+
-    'Mode=Share Deny None;Jet OLEDB:System database="";';
+    'Persist Security Info=False';
 end;
 
 procedure TClientListForm.SetGridColumn;
@@ -188,7 +188,7 @@ begin
          strCnt := 'бел. рублей за 1 Евро';
        end;
    end;
-   Label1.Caption := 'Загрузка курса валют....';
+   Label10.Caption := 'Загрузка курса валют....';
    // http://www.nbrb.by/API/ExRates/Rates/298?onDate=2016-7-5
    // url := url + '?onDate='+FormatDateTime('YYYY-MM-DD',DBDateTimeEditEh1.Value);
    // url := url + '?onDate='+ FormatDateTime('YYYY-MM-DD',DateTimePicker1.Date);
@@ -198,8 +198,11 @@ begin
    except
       On E: Exception do
          begin
+           // Необходима доработка исключений????
            Label10.Caption := 'Ошибка при получении курса валют';
-           ShowMessage(Label1.Caption+' '+E.Message);
+           //ShowMessage(Label10.Caption+':'+E.Message);
+           //if E.
+           ShowMessage(Label10.Caption);
            Exit;
          end;
    end;
@@ -216,6 +219,25 @@ end;
 
 procedure TClientListForm.FormCreate(Sender: TObject);
 begin
+  // Обработка открытия БД
+  try
+    MemTableEh1.Open;
+  except
+     on E:Exception Do
+      begin
+        ShowMessage('Ошибка при работе с БД: '+e.Message);
+        Application.Terminate;
+      end;
+  end;
+  try
+    ADOConnection1.Open;
+  except
+     on E:Exception Do
+       begin
+         ShowMessage('Ошибка при работе с БД: '+e.Message);
+         Application.Terminate;
+       end;
+  end;
   FileNameIni:=ExtractFilePath(ParamStr(0))+'\clients.ini';
   //Инициализация грида
   SetGridColumn;

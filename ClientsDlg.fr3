@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TfrxReport Version="6.0.10" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="По умолчанию" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43265,4934195949" ReportOptions.Description.Text="" ReportOptions.LastChange="43265,5789100463" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+<TfrxReport Version="6.0.10" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="По умолчанию" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43265,4934195949" ReportOptions.Description.Text="" ReportOptions.LastChange="43266,4698815625" ScriptLanguage="PascalScript" ScriptText.Text="procedure frxReport1OnRunDialogs(var Result: Boolean);&#13;&#10;begin&#13;&#10;  // Инициализация дат&#13;&#10;  DateEdit1.Date:=EncodeDate(YearOf(Date),MonthOf(Date),1);&#13;&#10;  DateEdit2.Date:=Date;&#13;&#10;  DialogPage1.ShowModal;&#13;&#10;end;&#13;&#10;&#13;&#10;begin&#13;&#10;&#13;&#10;end." OnRunDialogs="frxReport1OnRunDialogs">
   <Datasets>
     <item DataSet="ADOQuery1" DataSetName="ADOQuery1"/>
   </Datasets>
