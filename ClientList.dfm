@@ -1,6 +1,6 @@
 object ClientListForm: TClientListForm
-  Left = 219
-  Top = 168
+  Left = 110
+  Top = 57
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1056#1072#1073#1086#1090#1072' '#1089' '#1082#1083#1080#1077#1085#1090#1072#1084#1080
@@ -624,7 +624,7 @@ object ClientListForm: TClientListForm
     PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43265.493419594910000000
-    ReportOptions.LastChange = 43266.469881562500000000
+    ReportOptions.LastChange = 43266.833794710600000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'procedure frxReport1OnRunDialogs(var Result: Boolean);'
@@ -635,7 +635,7 @@ object ClientListForm: TClientListForm
         '                                                                ' +
         ' '
       '  DateEdit2.Date:=Date;'
-      '  DialogPage1.ShowModal;        '
+      '  Result:=DialogPage1.ShowModal=mrOK;        '
       'end;'
       ''
       'begin'
@@ -888,11 +888,11 @@ object ClientListForm: TClientListForm
       Font.Style = []
       BorderStyle = bsDialog
       DoubleBuffered = False
-      Height = 223.000000000000000000
+      Height = 228.000000000000000000
       ClientHeight = 189.000000000000000000
       Left = 392.000000000000000000
       Top = 238.000000000000000000
-      Width = 387.000000000000000000
+      Width = 395.000000000000000000
       Scaled = True
       ClientWidth = 379.000000000000000000
       object Label1: TfrxLabelControl
