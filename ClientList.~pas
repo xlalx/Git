@@ -9,7 +9,8 @@ uses
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   MemTableEh, DataDriverEh, ADODataDriverEh, StdCtrls, Mask, DBCtrlsEh,
   ExtCtrls, ComCtrls, IdBaseComponent, IdComponent, IdTCPConnection,
-  IdTCPClient, IdHTTP, frxClass, frxDBSet, frxADOComponents, frxDCtrl;
+  IdTCPClient, IdHTTP, frxClass, frxDBSet, frxADOComponents, frxDCtrl,
+  uLkJSON;
 
 type
   TClientListForm = class(TForm)
@@ -162,20 +163,29 @@ end;
 procedure TClientListForm.DisplayCurrency;
   var
      getUrl,
-     getStr   : string;
-     iPos     : integer;
+     getStr     :string;
+     iPos       :integer;
      strCurrency,
-     strCnt   : string;
+     strCnt     :string;
+     jsCurse    :TlkJSONobject;
 begin
    // http://www.nbrb.by/API/ExRates/Rates/145?onDate=2016-7-5
    getUrl:='http://www.nbrb.by/API/ExRates/Rates/';
    // Формирование кодов валют
-   // США - 145 РУР - 298 Евро 292
+   // США - 145 РУР - 298 Евро 292 РУР до деноминации 190
    case ComboBox1.ItemIndex of
      0:
        begin
-         getUrl := getUrl + '298';
-         strCnt := 'бел. рублей за 100 рос.рублей';
+         if DateTimePicker1.Date >= EncodeDate(2016, 07, 1) then
+           begin
+             getUrl := getUrl + '298';
+             strCnt := 'бел. рублей за 100 рос.рублей';
+           end
+         else
+           begin
+             getUrl := getUrl + '190';
+             strCnt := 'бел. рублей за 1 рос.рубль';
+           end;
        end;
      1:
        begin
@@ -207,7 +217,9 @@ begin
          end;
    end;
    //Обработка курса
+   jsCurse := TlkJSON.ParseText(getStr) as TlkJSONobject;
    iPos := pos('Cur_OfficialRate',getStr);
+   strCurrency := jsCurse.Field['Cur_OfficialRate'] as TlkJSONstring
    if iPos <> 0 then
      begin
       strCurrency := copy(getStr,iPos+length('Cur_OfficialRate')+2,6);

@@ -9,7 +9,8 @@ uses
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   MemTableEh, DataDriverEh, ADODataDriverEh, StdCtrls, Mask, DBCtrlsEh,
   ExtCtrls, ComCtrls, IdBaseComponent, IdComponent, IdTCPConnection,
-  IdTCPClient, IdHTTP, frxClass, frxDBSet, frxADOComponents, frxDCtrl;
+  IdTCPClient, IdHTTP, frxClass, frxDBSet, frxADOComponents, frxDCtrl,
+  uLkJSON;
 
 type
   TClientListForm = class(TForm)
@@ -162,20 +163,28 @@ end;
 procedure TClientListForm.DisplayCurrency;
   var
      getUrl,
-     getStr   : string;
-     iPos     : integer;
+     getStr     :string;
      strCurrency,
-     strCnt   : string;
+     strCnt     :string;
+     jsCurse    :TlkJSONobject;
 begin
    // http://www.nbrb.by/API/ExRates/Rates/145?onDate=2016-7-5
    getUrl:='http://www.nbrb.by/API/ExRates/Rates/';
    // Формирование кодов валют
-   // США - 145 РУР - 298 Евро 292
+   // США - 145 РУР - 298 Евро 292 РУР до деноминации 190
    case ComboBox1.ItemIndex of
      0:
        begin
-         getUrl := getUrl + '298';
-         strCnt := 'бел. рублей за 100 рос.рублей';
+         if DateTimePicker1.Date >= EncodeDate(2016, 07, 1) then
+           begin
+             getUrl := getUrl + '298';
+             strCnt := 'бел. рублей за 100 рос.рублей';
+           end
+         else
+           begin
+             getUrl := getUrl + '190';
+             strCnt := 'бел. рублей за 1 рос.рубль';
+           end;
        end;
      1:
        begin
@@ -206,16 +215,18 @@ begin
            Exit;
          end;
    end;
-   //Обработка курса
-   iPos := pos('Cur_OfficialRate',getStr);
-   if iPos <> 0 then
+   //Обработка курса через библиотеку lkJSON
+   jsCurse := TlkJSON.ParseText(getStr) as TlkJSONobject;
+   strCurrency := vartostr(jsCurse.Field['Cur_OfficialRate'].Value);
+   if strCurrency <> '' then
      begin
-      strCurrency := copy(getStr,iPos+length('Cur_OfficialRate')+2,6);
+      //strCurrency := copy(getStr,iPos+length('Cur_OfficialRate')+2,6);
       Label10.Caption := strCurrency+' '+strCnt;
      end
    else
      Label10.Caption := 'Невозможно обработать информацию о курсе валют';
      //ShowMessage('Невозможно обработать информацию о курсе валют');
+   jsCurse.Free;
 end;
 
 procedure TClientListForm.MemTableEh1AfterOpen(DataSet: TDataSet);

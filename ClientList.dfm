@@ -1,6 +1,6 @@
 object ClientListForm: TClientListForm
-  Left = 110
-  Top = 57
+  Left = 243
+  Top = 211
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1056#1072#1073#1086#1090#1072' '#1089' '#1082#1083#1080#1077#1085#1090#1072#1084#1080
