@@ -80,6 +80,7 @@ type
     procedure SetGridButton;
   public
     { Public declarations }
+    flagInsert : Boolean;
   end;
 
 // оличество записей, при которых таблица считаетс€ пустой
@@ -313,6 +314,7 @@ procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
   MemTableEh1.Edit;
+  let flagInsert:=false;
   clientEditForm.ShowModal;
   clientEditForm.Free;
 end;
@@ -327,17 +329,10 @@ begin
      begin
         ADOConnection1.BeginTrans;
         try
-           MemTableEh1.Delete;
-           {
-           AdoQuery1.SQL.Clear;
-           ADOQuery1.SQL.Add('delete from clients where client_id = :id');
-           ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-           }
-           // ”даление остальных таблиц
+           // ”даление лополнительных таблиц
            AdoQuery1.SQL.Clear;
            ADOQuery1.SQL.Add('delete from addresses where client_id = :id');
            ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-           //ADOQuery1.
            ADOQuery1.ExecSQL;
            AdoQuery1.SQL.Clear;
            ADOQuery1.SQL.Add('delete from phones where client_id = :id');
@@ -347,11 +342,11 @@ begin
            ADOQuery1.SQL.Add('delete from emails where client_id = :id');
            ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
            ADOQuery1.ExecSQL;
+           // ”даление основной таблицы
+           MemTableEh1.Delete;
            ADOConnection1.CommitTrans;
            MemTableEh1.ApplyUpdates(0);
            DbGridEh1.Refresh;
-
-           //ADODataDriverEh1.
         except
            on E:Exception Do
              begin
@@ -362,7 +357,6 @@ begin
              end;
         end;
      end;
-     //ADOConnection1.BeginTrans;
   SetGridButton;
 end;
 
@@ -377,6 +371,7 @@ procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
   MemTableEh1.Append;
+  let flagInsert:=true;
   clientEditForm.ShowModal;
   clientEditForm.Free;
   SetGridButton;

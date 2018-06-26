@@ -77,6 +77,13 @@ object ClientEditForm: TClientEditForm
     Height = 13
     Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1081' '#1090#1077#1083#1077#1092#1086#1085
   end
+  object Label10: TLabel
+    Left = 312
+    Top = 80
+    Width = 79
+    Height = 13
+    Caption = #1044#1072#1090#1072' '#1088#1086#1078#1076#1077#1085#1080#1103
+  end
   object Button1: TButton
     Left = 88
     Top = 224
@@ -198,5 +205,18 @@ object ClientEditForm: TClientEditForm
     TabOrder = 9
     Visible = True
     OnKeyPress = DBEditEh8KeyPress
+  end
+  object DBDateTimeEditEh1: TDBDateTimeEditEh
+    Left = 456
+    Top = 80
+    Width = 120
+    Height = 21
+    DataField = 'BirthDate'
+    DataSource = ClientListForm.DataSource1
+    DynProps = <>
+    EditButtons = <>
+    Kind = dtkDateEh
+    TabOrder = 10
+    Visible = True
   end
 end

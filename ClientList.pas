@@ -56,7 +56,6 @@ type
     Label12: TLabel;
     DBEditEh9: TDBEditEh;
     ADOQuery1: TADOQuery;
-    Label13: TLabel;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -80,6 +79,7 @@ type
     procedure SetGridButton;
   public
     { Public declarations }
+    flagInsert : Boolean;
   end;
 
 // оличество записей, при которых таблица считаетс€ пустой
@@ -312,7 +312,8 @@ end;
 procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
-  MemTableEh1.Edit;
+  //MemTableEh1.Edit;
+  flagInsert:=false;
   clientEditForm.ShowModal;
   clientEditForm.Free;
 end;
@@ -321,22 +322,15 @@ end;
 procedure TClientListForm.Button3Click(Sender: TObject);
   var buttonSel  : Integer;
 begin
-  Label13.Caption:=DbGridEh1.FieldColumns['id'].DisplayText;
   buttonSel := MessageDlg('¬ы уверены, что хотите удалить клиента?',mtCustom, mbOKCancel, 0);
   if buttonSel = mrOK then
      begin
         ADOConnection1.BeginTrans;
         try
-           {
-           AdoQuery1.SQL.Clear;
-           ADOQuery1.SQL.Add('delete from clients where client_id = :id');
-           ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-           }
-           // ”даление остальных таблиц
+           // ”даление лополнительных таблиц
            AdoQuery1.SQL.Clear;
            ADOQuery1.SQL.Add('delete from addresses where client_id = :id');
            ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-           //ADOQuery1.
            ADOQuery1.ExecSQL;
            AdoQuery1.SQL.Clear;
            ADOQuery1.SQL.Add('delete from phones where client_id = :id');
@@ -346,12 +340,11 @@ begin
            ADOQuery1.SQL.Add('delete from emails where client_id = :id');
            ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
            ADOQuery1.ExecSQL;
+           // ”даление основной таблицы
            MemTableEh1.Delete;
            ADOConnection1.CommitTrans;
            MemTableEh1.ApplyUpdates(0);
            DbGridEh1.Refresh;
-
-           //ADODataDriverEh1.
         except
            on E:Exception Do
              begin
@@ -362,7 +355,6 @@ begin
              end;
         end;
      end;
-     //ADOConnection1.BeginTrans;
   SetGridButton;
 end;
 
@@ -376,7 +368,8 @@ end;
 procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
-  MemTableEh1.Append;
+  //MemTableEh1.Append;
+  flagInsert:=true;
   clientEditForm.ShowModal;
   clientEditForm.Free;
   SetGridButton;

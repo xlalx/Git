@@ -28,6 +28,8 @@ type
     DBEditEh6: TDBEditEh;
     DBEditEh7: TDBEditEh;
     DBEditEh8: TDBEditEh;
+    Label10: TLabel;
+    DBDateTimeEditEh1: TDBDateTimeEditEh;
     procedure DBEditEh1KeyPress(Sender: TObject; var Key: Char);
     procedure DBEditEh2KeyPress(Sender: TObject; var Key: Char);
     procedure DBEditEh3KeyPress(Sender: TObject; var Key: Char);
@@ -139,7 +141,7 @@ begin
   except
      on E:Exception Do
       begin
-        ShowMessage('Ошибка при работк с БД '+e.Message)
+        ShowMessage('Ошибка при работе с БД '+e.Message)
       end
   end;
   clientEditForm.close;
