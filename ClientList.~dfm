@@ -562,7 +562,7 @@ object ClientListForm: TClientListForm
         Size = 255
       end
       item
-        Name = 'Address1'
+        Name = 'Address'
         DataType = ftWideString
         Size = 255
       end
@@ -572,7 +572,7 @@ object ClientListForm: TClientListForm
         Size = 255
       end
       item
-        Name = 'Email1'
+        Name = 'Email'
         DataType = ftWideString
         Size = 255
       end
@@ -582,7 +582,7 @@ object ClientListForm: TClientListForm
         Size = 255
       end
       item
-        Name = 'Phone1'
+        Name = 'Phone'
         DataType = ftWideString
         Size = 255
       end
@@ -1029,7 +1029,7 @@ object ClientListForm: TClientListForm
     PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43272.438285405100000000
-    ReportOptions.LastChange = 43272.571652013900000000
+    ReportOptions.LastChange = 43273.446211469900000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'procedure Button1OnClick(Sender: TfrxComponent);'
@@ -1062,34 +1062,18 @@ object ClientListForm: TClientListForm
         Params = <>
         SQL.Strings = (
           
-            'SELECT Clients.id, Clients.FirstName, Clients.Surname, Clients.B' +
-            'irthDate, "'#1040#1076#1088#1077#1089'" AS NameField,'
+            'SELECT Clients.id, Clients.FirstName, Clients.BirthDate, Clients' +
+            '.Surname,'
+          '       [Clients '#1047#1072#1087#1088#1086#1089'4].NameField,[Clients '#1047#1072#1087#1088#1086#1089'4].Name,'
           
-            '       Address.Address AS Name,1 as ordLine, Address.num as num ' +
-            '                                                                ' +
-            '                                                      '
-          'FROM Clients LEFT JOIN Address ON Clients.id = Address.client_id'
-          'UNION ALL'
+            '       [Clients '#1047#1072#1087#1088#1086#1089'4].group_num,[Clients '#1047#1072#1087#1088#1086#1089'4].num        ' +
+            '                      '
           
-            'SELECT Clients.id, Clients.FirstName, Clients.Surname, Clients.B' +
-            'irthDate, "'#1069#1083'.'#1087#1086#1095#1090#1072'" AS NameField,'
+            'FROM Clients LEFT JOIN [Clients '#1079#1072#1087#1088#1086#1089'4] ON Clients.id = [Client' +
+            's '#1079#1072#1087#1088#1086#1089'4].id'
           
-            '       Email.Email AS Name,2 as ordLine,Email.num as num        ' +
-            '                                                                ' +
-            '                                               '
-          'FROM Clients LEFT JOIN Email ON Clients.id = Email.client_id'
-          'UNION ALL'
-          
-            'SELECT Clients.id, Clients.FirstName, Clients.Surname, Clients.B' +
-            'irthDate, "'#1053#1086#1084#1077#1088' '#1090#1077#1083#1077#1092#1086#1085#1072'" AS NameField,'
-          
-            '       Phone.Phone AS Name,3 as ordLine,Phone.num as num        ' +
-            '                                                                ' +
-            '                                               '
-          'FROM Clients LEFT JOIN Phone ON Clients.id = Phone.client_id'
-          
-            'ORDER BY Clients.id,ordLine,num                                 ' +
-            '  '
+            'ORDER BY Clients.id,group_num,num                               ' +
+            '    '
           '              '
           '  ')
         CommandTimeout = 30
@@ -1291,6 +1275,7 @@ object ClientListForm: TClientListForm
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
+      BorderStyle = bsDialog
       DoubleBuffered = False
       Height = 200.000000000000000000
       ClientHeight = 166.000000000000000000

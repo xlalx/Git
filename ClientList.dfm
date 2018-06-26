@@ -1029,7 +1029,7 @@ object ClientListForm: TClientListForm
     PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43272.438285405100000000
-    ReportOptions.LastChange = 43272.575266562500000000
+    ReportOptions.LastChange = 43273.607411354200000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'procedure Button1OnClick(Sender: TfrxComponent);'
@@ -1062,34 +1062,18 @@ object ClientListForm: TClientListForm
         Params = <>
         SQL.Strings = (
           
-            'SELECT Clients.id, Clients.FirstName, Clients.Surname, Clients.B' +
-            'irthDate, "'#1040#1076#1088#1077#1089'" AS NameField,'
+            'SELECT Clients.id, Clients.FirstName, Clients.BirthDate, Clients' +
+            '.Surname,'
+          '       [Clients '#1047#1072#1087#1088#1086#1089'6].NameField,[Clients '#1047#1072#1087#1088#1086#1089'6].Name,'
           
-            '       Address.Address AS Name,1 as ordLine, Address.num as num ' +
-            '                                                                ' +
-            '                                                      '
-          'FROM Clients LEFT JOIN Address ON Clients.id = Address.client_id'
-          'UNION ALL'
+            '       [Clients '#1047#1072#1087#1088#1086#1089'6].group_num,[Clients '#1047#1072#1087#1088#1086#1089'6].num        ' +
+            '                      '
           
-            'SELECT Clients.id, Clients.FirstName, Clients.Surname, Clients.B' +
-            'irthDate, "'#1069#1083'.'#1087#1086#1095#1090#1072'" AS NameField,'
+            'FROM Clients LEFT JOIN [Clients '#1079#1072#1087#1088#1086#1089'6] ON Clients.id = [Client' +
+            's '#1079#1072#1087#1088#1086#1089'6].id'
           
-            '       Email.Email AS Name,2 as ordLine,Email.num as num        ' +
-            '                                                                ' +
-            '                                               '
-          'FROM Clients LEFT JOIN Email ON Clients.id = Email.client_id'
-          'UNION ALL'
-          
-            'SELECT Clients.id, Clients.FirstName, Clients.Surname, Clients.B' +
-            'irthDate, "'#1053#1086#1084#1077#1088' '#1090#1077#1083#1077#1092#1086#1085#1072'" AS NameField,'
-          
-            '       Phone.Phone AS Name,3 as ordLine,Phone.num as num        ' +
-            '                                                                ' +
-            '                                               '
-          'FROM Clients LEFT JOIN Phone ON Clients.id = Phone.client_id'
-          
-            'ORDER BY Clients.id,ordLine,num                                 ' +
-            '  '
+            'ORDER BY Clients.id,group_num,num                               ' +
+            '    '
           '              '
           '  ')
         CommandTimeout = 30
@@ -1112,7 +1096,7 @@ object ClientListForm: TClientListForm
         FillType = ftBrush
         Frame.Typ = []
         Height = 60.472480000000000000
-        Top = 18.897650000000000000
+        Top = 16.000000000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
           Left = 143.622140000000000000
@@ -1182,7 +1166,7 @@ object ClientListForm: TClientListForm
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 181.417440000000000000
+        Top = 136.000000000000000000
         Width = 718.110700000000000000
         DataSet = frxReport2.ADOQuery1
         DataSetName = 'ADOQuery1'
@@ -1227,7 +1211,7 @@ object ClientListForm: TClientListForm
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 139.842610000000000000
+        Top = 96.000000000000000000
         Width = 718.110700000000000000
         Condition = 'ADOQuery1."id"'
         object ADOQuery1FirstName1: TfrxMemoView
