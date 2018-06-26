@@ -58,8 +58,8 @@ object ClientListForm: TClientListForm
           Caption = #1058#1077#1083#1077#1092#1086#1085
         end
         object Label7: TLabel
-          Left = 394
-          Top = 124
+          Left = 384
+          Top = 128
           Width = 135
           Height = 13
           Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1072#1103' '#1101#1083'. '#1087#1086#1095#1090#1072
@@ -72,8 +72,8 @@ object ClientListForm: TClientListForm
           Caption = #1069#1083'. '#1087#1086#1095#1090#1072
         end
         object Label5: TLabel
-          Left = 392
-          Top = 92
+          Left = 384
+          Top = 96
           Width = 121
           Height = 13
           Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1081' '#1072#1076#1088#1077#1089
@@ -93,8 +93,8 @@ object ClientListForm: TClientListForm
           Caption = #1060#1072#1084#1080#1083#1080#1103
         end
         object Label9: TLabel
-          Left = 395
-          Top = 156
+          Left = 384
+          Top = 160
           Width = 134
           Height = 13
           Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1081' '#1090#1077#1083#1077#1092#1086#1085
@@ -105,6 +105,13 @@ object ClientListForm: TClientListForm
           Width = 158
           Height = 13
           Caption = #1055#1086#1083#1085#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1082#1083#1080#1077#1085#1090#1077
+        end
+        object Label12: TLabel
+          Left = 384
+          Top = 64
+          Width = 79
+          Height = 13
+          Caption = #1044#1072#1090#1072' '#1088#1086#1078#1076#1077#1085#1080#1103
         end
         object DBEditEh1: TDBEditEh
           Left = 96
@@ -208,6 +215,18 @@ object ClientListForm: TClientListForm
           EditButtons = <>
           ReadOnly = True
           TabOrder = 7
+          Visible = True
+        end
+        object DBEditEh9: TDBEditEh
+          Left = 544
+          Top = 64
+          Width = 121
+          Height = 21
+          DataField = 'BirthDate'
+          DataSource = DataSource1
+          DynProps = <>
+          EditButtons = <>
+          TabOrder = 8
           Visible = True
         end
       end
@@ -1029,7 +1048,7 @@ object ClientListForm: TClientListForm
     PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43272.438285405100000000
-    ReportOptions.LastChange = 43273.446211469900000000
+    ReportOptions.LastChange = 43273.607411354200000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'procedure Button1OnClick(Sender: TfrxComponent);'
@@ -1064,13 +1083,13 @@ object ClientListForm: TClientListForm
           
             'SELECT Clients.id, Clients.FirstName, Clients.BirthDate, Clients' +
             '.Surname,'
-          '       [Clients '#1047#1072#1087#1088#1086#1089'4].NameField,[Clients '#1047#1072#1087#1088#1086#1089'4].Name,'
+          '       [Clients '#1047#1072#1087#1088#1086#1089'6].NameField,[Clients '#1047#1072#1087#1088#1086#1089'6].Name,'
           
-            '       [Clients '#1047#1072#1087#1088#1086#1089'4].group_num,[Clients '#1047#1072#1087#1088#1086#1089'4].num        ' +
+            '       [Clients '#1047#1072#1087#1088#1086#1089'6].group_num,[Clients '#1047#1072#1087#1088#1086#1089'6].num        ' +
             '                      '
           
-            'FROM Clients LEFT JOIN [Clients '#1079#1072#1087#1088#1086#1089'4] ON Clients.id = [Client' +
-            's '#1079#1072#1087#1088#1086#1089'4].id'
+            'FROM Clients LEFT JOIN [Clients '#1079#1072#1087#1088#1086#1089'6] ON Clients.id = [Client' +
+            's '#1079#1072#1087#1088#1086#1089'6].id'
           
             'ORDER BY Clients.id,group_num,num                               ' +
             '    '

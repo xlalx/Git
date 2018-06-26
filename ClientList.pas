@@ -15,7 +15,6 @@ uses
 type
   TClientListForm = class(TForm)
     ADODataDriverEh1: TADODataDriverEh;
-    ADOConnectionProviderEh1: TADOConnectionProviderEh;
     DataSource1: TDataSource;
     MemTableEh1: TMemTableEh;
     DBGridEh1: TDBGridEh;
@@ -54,6 +53,8 @@ type
     ADOConnection1: TADOConnection;
     Button6: TButton;
     frxReport2: TfrxReport;
+    Label12: TLabel;
+    DBEditEh9: TDBEditEh;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -99,10 +100,10 @@ var
   FilePath: String;
 begin
   FilePath := ExtractFilePath(ParamStr(0))+'\clients.mdb';
-  ADOConnectionProviderEh1.InlineConnection.ConnectionString :=
-    'Provider=Microsoft.ACE.OLEDB.4.0;'+
-    'Data Source=' + FilePath + ';'+
-    'Persist Security Info=False';
+  //ADOConnectionProviderEh1.InlineConnection.ConnectionString :=
+  //  'Provider=Microsoft.ACE.OLEDB.4.0;'+
+  //  'Data Source=' + FilePath + ';'+
+  //  'Persist Security Info=False';
 end;
 
 procedure TClientListForm.SetGridColumn;
@@ -321,6 +322,7 @@ begin
      begin
         MemTableEh1.Delete;
      end;
+     //ADOConnection1.BeginTrans;
   SetGridButton;
 end;
 

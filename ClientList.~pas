@@ -54,6 +54,8 @@ type
     ADOConnection1: TADOConnection;
     Button6: TButton;
     frxReport2: TfrxReport;
+    Label12: TLabel;
+    DBEditEh9: TDBEditEh;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -321,6 +323,7 @@ begin
      begin
         MemTableEh1.Delete;
      end;
+     //ADOConnection1.BeginTrans;
   SetGridButton;
 end;
 
