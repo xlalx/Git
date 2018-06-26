@@ -1255,6 +1255,14 @@ object ClientListForm: TClientListForm
       item
         Name = 'address'
         Value = Null
+      end
+      item
+        Name = 'email'
+        Value = Null
+      end
+      item
+        Name = 'phone'
+        Value = Null
       end>
     Left = 800
     Top = 424

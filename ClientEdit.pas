@@ -156,49 +156,90 @@ begin
       end
   end;
   }
-  if clientListForm.flagInsert then
-  else
-      with clientListForm do
-        begin
-           ADOConnection1.BeginTrans;
-           try
-              // Работа с лополнительными таблиц
+  with clientListForm do
+    begin
+       ADOConnection1.BeginTrans;
+       try
+          // Заполнение основной таблицы
+          ClientListForm.MemTableEh1.Post;
+          // Работа с лополнительными таблицами
+          if not clientListForm.flagInsert then
+             begin
+                // При редактировании удаляем всю дополнительную информацию и заново добавляем
+                AdoQuery1.SQL.Clear;
+                ADOQuery1.SQL.Add('delete from addresses where client_id = :id');
+                ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                ADOQuery1.ExecSQL;
+                AdoQuery1.SQL.Clear;
+                ADOQuery1.SQL.Add('delete from phones where client_id = :id');
+                ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                ADOQuery1.ExecSQL;
+                AdoQuery1.SQL.Clear;
+                ADOQuery1.SQL.Add('delete from emails where client_id = :id');
+                ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                ADOQuery1.ExecSQL;
+            end;
+          if length(DBEditEh3.Text) <> 0 then
+            begin
               AdoQuery1.SQL.Clear;
-              ADOQuery1.SQL.Add('delete from addresses where client_id = :id');
+              ADOQuery1.SQL.Add('insert into addresses (client_id, num, address) values (:id, 1, :address)');
               ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+              ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh3.Text;
               ADOQuery1.ExecSQL;
+            end;
+          if length(DBEditEh4.Text) <> 0 then
+            begin
               AdoQuery1.SQL.Clear;
-              ADOQuery1.SQL.Add('delete from phones where client_id = :id');
+              ADOQuery1.SQL.Add('insert into addresses (client_id, num, address) values (:id, 2, :address)');
               ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+              ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh4.Text;
               ADOQuery1.ExecSQL;
+            end;
+          if length(DBEditEh5.Text) <> 0 then
+            begin
               AdoQuery1.SQL.Clear;
-              ADOQuery1.SQL.Add('delete from emails where client_id = :id');
+              ADOQuery1.SQL.Add('insert into emails (client_id, num, email) values (:id, 1, :email)');
               ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+              ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh5.Text;
               ADOQuery1.ExecSQL;
-              if length(DBEditEh3.Text) <> 0 then
-                begin
-                  AdoQuery1.SQL.Clear;
-                  ADOQuery1.SQL.Add('insert into addresses (client_id, num, address) values (:id, 1, :address)');
-                  ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-                  ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh3.Text;
-                  ADOQuery1.ExecSQL;
-                end;
-              // Удаление основной таблицы
-              ClientListForm.MemTableEh1.Post;
-              ClientListForm.MemTableEh1.ApplyUpdates(-1);
-              ADOConnection1.CommitTrans;
-              MemTableEh1.ApplyUpdates(0);
-              DbGridEh1.Refresh;
-           except
-              on E:Exception Do
-                begin
-                  MemTableEh1.Cancel;
-                  ADOConnection1.RollBackTrans;
-                  ShowMessage('Ошибка при удалении клиента: '+e.Message);
-                  raise;
-                end;
-              end;
-        end;
+            end;
+          if length(DBEditEh6.Text) <> 0 then
+            begin
+              AdoQuery1.SQL.Clear;
+              ADOQuery1.SQL.Add('insert into emails (client_id, num, email) values (:id, 2, :email)');
+              ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+              ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh6.Text;
+              ADOQuery1.ExecSQL;
+            end;
+          if length(DBEditEh7.Text) <> 0 then
+            begin
+              AdoQuery1.SQL.Clear;
+              ADOQuery1.SQL.Add('insert into phones (client_id, num, phone) values (:id, 1, :phone)');
+              ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+              ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
+              ADOQuery1.ExecSQL;
+            end;
+          if length(DBEditEh8.Text) <> 0 then
+            begin
+              AdoQuery1.SQL.Clear;
+              ADOQuery1.SQL.Add('insert into phones (client_id, num, phone) values (:id, 2, :phone)');
+              ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+              ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
+              ADOQuery1.ExecSQL;
+            end;
+          MemTableEh1.ApplyUpdates(0);
+          ADOConnection1.CommitTrans;
+          DbGridEh1.Refresh;
+       except
+          on E:Exception Do
+            begin
+              MemTableEh1.Cancel;
+              ADOConnection1.RollBackTrans;
+              ShowMessage('Ошибка при удалении клиента: '+e.Message);
+              raise;
+            end;
+       end;
+    end;
   clientEditForm.close;
 end;
 
@@ -221,7 +262,7 @@ begin
   else
      begin
        clientListForm.MemTableEh1.Edit;
-       // Сохраниние страых полей
+       // Сохранение старых полей
        oldRecord.address := clientListForm.MemTableEh1.FieldValues['address'];
        oldRecord.address2 := clientListForm.MemTableEh1.FieldValues['address2'];
        oldRecord.email := clientListForm.MemTableEh1.FieldValues['email'];

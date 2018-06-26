@@ -56,7 +56,6 @@ type
     Label12: TLabel;
     DBEditEh9: TDBEditEh;
     ADOQuery1: TADOQuery;
-    Label13: TLabel;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -313,8 +312,8 @@ end;
 procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
-  MemTableEh1.Edit;
-  let flagInsert:=false;
+  //MemTableEh1.Edit;
+  flagInsert:=false;
   clientEditForm.ShowModal;
   clientEditForm.Free;
 end;
@@ -323,7 +322,6 @@ end;
 procedure TClientListForm.Button3Click(Sender: TObject);
   var buttonSel  : Integer;
 begin
-  Label13.Caption:=DbGridEh1.FieldColumns['id'].DisplayText;
   buttonSel := MessageDlg('¬ы уверены, что хотите удалить клиента?',mtCustom, mbOKCancel, 0);
   if buttonSel = mrOK then
      begin
@@ -370,8 +368,8 @@ end;
 procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
-  MemTableEh1.Append;
-  let flagInsert:=true;
+  //MemTableEh1.Append;
+  flagInsert:=true;
   clientEditForm.ShowModal;
   clientEditForm.Free;
   SetGridButton;

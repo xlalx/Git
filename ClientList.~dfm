@@ -18,13 +18,6 @@ object ClientListForm: TClientListForm
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
-  object Label13: TLabel
-    Left = 48
-    Top = 480
-    Width = 38
-    Height = 13
-    Caption = 'Label13'
-  end
   object DBGridEh1: TDBGridEh
     Left = 16
     Top = 40
@@ -1257,6 +1250,10 @@ object ClientListForm: TClientListForm
       item
         Name = 'id'
         Size = -1
+        Value = Null
+      end
+      item
+        Name = 'address'
         Value = Null
       end>
     Left = 800

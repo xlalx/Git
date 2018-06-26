@@ -311,9 +311,9 @@ end;
 // Редактирование клиента
 procedure TClientListForm.Button2Click(Sender: TObject);
 begin
+  flagInsert:=false;
   clientEditForm:=TClientEditForm.Create(Application);
   //MemTableEh1.Edit;
-  flagInsert:=false;
   clientEditForm.ShowModal;
   clientEditForm.Free;
 end;
@@ -367,9 +367,9 @@ end;
 // Добавление клиента
 procedure TClientListForm.Button4Click(Sender: TObject);
 begin
+  flagInsert:=true;
   clientEditForm:=TClientEditForm.Create(Application);
   //MemTableEh1.Append;
-  flagInsert:=true;
   clientEditForm.ShowModal;
   clientEditForm.Free;
   SetGridButton;
