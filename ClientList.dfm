@@ -18,6 +18,13 @@ object ClientListForm: TClientListForm
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
+  object Label13: TLabel
+    Left = 48
+    Top = 480
+    Width = 38
+    Height = 13
+    Caption = 'Label13'
+  end
   object DBGridEh1: TDBGridEh
     Left = 16
     Top = 40
@@ -424,7 +431,7 @@ object ClientListForm: TClientListForm
         Value = Null
       end>
     DeleteCommand.CommandText.Strings = (
-      'delete from clients where id = :OLD_id')
+      'delete from clients where id = :OLD_id;')
     DeleteCommand.Parameters = <
       item
         Name = 'OLD_id'
@@ -459,6 +466,7 @@ object ClientListForm: TClientListForm
   object MemTableEh1: TMemTableEh
     Active = True
     AutoCalcFields = False
+    CachedUpdates = True
     FieldDefs = <
       item
         Name = 'id'
@@ -1242,5 +1250,16 @@ object ClientListForm: TClientListForm
         Color = clBtnFace
       end
     end
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <
+      item
+        Name = 'id'
+        Size = -1
+        Value = Null
+      end>
+    Left = 800
+    Top = 424
   end
 end

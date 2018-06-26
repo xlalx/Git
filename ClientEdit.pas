@@ -28,6 +28,8 @@ type
     DBEditEh6: TDBEditEh;
     DBEditEh7: TDBEditEh;
     DBEditEh8: TDBEditEh;
+    Label10: TLabel;
+    DBDateTimeEditEh1: TDBDateTimeEditEh;
     procedure DBEditEh1KeyPress(Sender: TObject; var Key: Char);
     procedure DBEditEh2KeyPress(Sender: TObject; var Key: Char);
     procedure DBEditEh3KeyPress(Sender: TObject; var Key: Char);

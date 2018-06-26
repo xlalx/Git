@@ -1,6 +1,6 @@
 object ClientListForm: TClientListForm
-  Left = 243
-  Top = 211
+  Left = 261
+  Top = 228
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1056#1072#1073#1086#1090#1072' '#1089' '#1082#1083#1080#1077#1085#1090#1072#1084#1080
@@ -18,6 +18,13 @@ object ClientListForm: TClientListForm
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
+  object Label13: TLabel
+    Left = 48
+    Top = 480
+    Width = 38
+    Height = 13
+    Caption = 'Label13'
+  end
   object DBGridEh1: TDBGridEh
     Left = 16
     Top = 40
@@ -333,6 +340,7 @@ object ClientListForm: TClientListForm
     OnClick = Button6Click
   end
   object ADODataDriverEh1: TADODataDriverEh
+    ADOConnection = ADOConnection1
     ConnectionString = 
       'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=clients.mdb;Persist' +
       ' Security Info=False'
@@ -348,12 +356,7 @@ object ClientListForm: TClientListForm
       'set'
       '  FirstName = :FirstName,'
       '  SurName = :SurName,'
-      '  Address = :Address,'
-      '  Address2 = :Address2,'
-      '  Email = :Email,'
-      '  Email2 = :Email2,'
-      '  Phone = :Phone,'
-      '  Phone2 = :Phone2,'
+      '  BirthDate = :BirthDate,'
       '  ChangeDate = Date()'
       'where'
       '  id = :OLD_id')
@@ -377,52 +380,7 @@ object ClientListForm: TClientListForm
         Value = Null
       end
       item
-        Name = 'Address'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Address2'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Email'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Email2'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Phone'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Phone2'
+        Name = 'BirthDate'
         Attributes = [paNullable]
         DataType = ftWideString
         NumericScale = 255
@@ -441,13 +399,9 @@ object ClientListForm: TClientListForm
       end>
     InsertCommand.CommandText.Strings = (
       'insert into clients'
-      
-        '  (FirstName,SurName, Address, Address2, Email, Email2, Phone, P' +
-        'hone2)'
+      '  (FirstName,SurName, BirthDate)'
       'values'
-      
-        '  (:FirstName, :SurName, :Address, :Address2, :Email, :Email2, :' +
-        'Phone, :Phone2)')
+      '  (:FirstName, :SurName, :BirthDate)')
     InsertCommand.Parameters = <
       item
         Name = 'FirstName'
@@ -468,52 +422,7 @@ object ClientListForm: TClientListForm
         Value = Null
       end
       item
-        Name = 'Address'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Address2'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Email'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Email2'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Phone'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        NumericScale = 255
-        Precision = 255
-        Size = 510
-        Value = Null
-      end
-      item
-        Name = 'Phone2'
+        Name = 'BirthDate'
         Attributes = [paNullable]
         DataType = ftWideString
         NumericScale = 255
@@ -522,7 +431,7 @@ object ClientListForm: TClientListForm
         Value = Null
       end>
     DeleteCommand.CommandText.Strings = (
-      'delete from clients where id = :OLD_id')
+      'delete from clients where id = :OLD_id;')
     DeleteCommand.Parameters = <
       item
         Name = 'OLD_id'
@@ -549,13 +458,6 @@ object ClientListForm: TClientListForm
     Left = 760
     Top = 424
   end
-  object ADOConnectionProviderEh1: TADOConnectionProviderEh
-    InlineConnection.Provider = 'Microsoft.ACE.OLEDB.12.0'
-    ServerType = 'MSAccess'
-    InlineConnectionBeforeConnect = ADOConnectionProviderEh1InlineConnectionBeforeConnect
-    Left = 800
-    Top = 424
-  end
   object DataSource1: TDataSource
     DataSet = MemTableEh1
     Left = 832
@@ -564,6 +466,7 @@ object ClientListForm: TClientListForm
   object MemTableEh1: TMemTableEh
     Active = True
     AutoCalcFields = False
+    CachedUpdates = True
     FieldDefs = <
       item
         Name = 'id'
@@ -1347,5 +1250,16 @@ object ClientListForm: TClientListForm
         Color = clBtnFace
       end
     end
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <
+      item
+        Name = 'id'
+        Size = -1
+        Value = Null
+      end>
+    Left = 800
+    Top = 424
   end
 end

@@ -36,5 +36,8 @@ where
   VendorNo = :OLD_VendorNo
 
 ----
+delete from clients
+where
+  id = :OLD_id
 
 AUTO_INCREMENT_FIELD=VendorNo

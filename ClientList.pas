@@ -55,6 +55,8 @@ type
     frxReport2: TfrxReport;
     Label12: TLabel;
     DBEditEh9: TDBEditEh;
+    ADOQuery1: TADOQuery;
+    Label13: TLabel;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -306,6 +308,7 @@ begin
     end;
 end;
 
+// Редактирование клиента
 procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
@@ -314,13 +317,50 @@ begin
   clientEditForm.Free;
 end;
 
+// Удаление клиента
 procedure TClientListForm.Button3Click(Sender: TObject);
   var buttonSel  : Integer;
 begin
+  Label13.Caption:=DbGridEh1.FieldColumns['id'].DisplayText;
   buttonSel := MessageDlg('Вы уверены, что хотите удалить клиента?',mtCustom, mbOKCancel, 0);
   if buttonSel = mrOK then
      begin
-        MemTableEh1.Delete;
+        ADOConnection1.BeginTrans;
+        try
+           {
+           AdoQuery1.SQL.Clear;
+           ADOQuery1.SQL.Add('delete from clients where client_id = :id');
+           ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+           }
+           // Удаление остальных таблиц
+           AdoQuery1.SQL.Clear;
+           ADOQuery1.SQL.Add('delete from addresses where client_id = :id');
+           ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+           //ADOQuery1.
+           ADOQuery1.ExecSQL;
+           AdoQuery1.SQL.Clear;
+           ADOQuery1.SQL.Add('delete from phones where client_id = :id');
+           ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+           ADOQuery1.ExecSQL;
+           AdoQuery1.SQL.Clear;
+           ADOQuery1.SQL.Add('delete from emails where client_id = :id');
+           ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+           ADOQuery1.ExecSQL;
+           MemTableEh1.Delete;
+           ADOConnection1.CommitTrans;
+           MemTableEh1.ApplyUpdates(0);
+           DbGridEh1.Refresh;
+
+           //ADODataDriverEh1.
+        except
+           on E:Exception Do
+             begin
+               MemTableEh1.Cancel;
+               ADOConnection1.RollBackTrans;
+               ShowMessage('Ошибка при удалении клиента: '+e.Message);
+               raise;
+             end;
+        end;
      end;
      //ADOConnection1.BeginTrans;
   SetGridButton;
@@ -332,6 +372,7 @@ begin
   SetGridButton;
 end;
 
+// Добавление клиента
 procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   clientEditForm:=TClientEditForm.Create(Application);
@@ -341,14 +382,10 @@ begin
   SetGridButton;
 end;
 
+// Выбор валюты
 procedure TClientListForm.ComboBox1Change(Sender: TObject);
 begin
  DisplayCurrency;
-end;
-
-procedure TClientListForm.Button5Click(Sender: TObject);
-begin
-  frxReport1.ShowReport;
 end;
 
 procedure TClientListForm.DateTimePicker1CloseUp(Sender: TObject);
@@ -356,7 +393,13 @@ begin
   DisplayCurrency;
 end;
 
+// Отчет по клиентам за дату
+procedure TClientListForm.Button5Click(Sender: TObject);
+begin
+  frxReport1.ShowReport;
+end;
 
+// Отчет по клиентам (подробный)
 procedure TClientListForm.Button6Click(Sender: TObject);
 begin
   frxReport2.ShowReport;
