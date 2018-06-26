@@ -4,7 +4,7 @@ object ClientListForm: TClientListForm
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1056#1072#1073#1086#1090#1072' '#1089' '#1082#1083#1080#1077#1085#1090#1072#1084#1080
-  ClientHeight = 481
+  ClientHeight = 501
   ClientWidth = 916
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -39,7 +39,7 @@ object ClientListForm: TClientListForm
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 30
+        Width = 836
         Height = 185
         Align = alTop
         TabOrder = 0
@@ -232,7 +232,7 @@ object ClientListForm: TClientListForm
     OnClick = Button2Click
   end
   object Button3: TButton
-    Left = 176
+    Left = 144
     Top = 440
     Width = 105
     Height = 25
@@ -241,7 +241,7 @@ object ClientListForm: TClientListForm
     OnClick = Button3Click
   end
   object Button4: TButton
-    Left = 320
+    Left = 256
     Top = 440
     Width = 121
     Height = 25
@@ -296,13 +296,22 @@ object ClientListForm: TClientListForm
     end
   end
   object Button5: TButton
-    Left = 488
+    Left = 392
     Top = 440
-    Width = 75
+    Width = 177
     Height = 25
-    Caption = #1054#1090#1095#1077#1090
+    Caption = #1054#1090#1095#1077#1090' '#1087#1086' '#1080#1079#1084#1077#1085#1085#1099#1084' '#1082#1083#1080#1077#1085#1090#1072#1084
     TabOrder = 6
     OnClick = Button5Click
+  end
+  object Button6: TButton
+    Left = 392
+    Top = 472
+    Width = 177
+    Height = 25
+    Caption = #1054#1090#1095#1077#1090' '#1087#1086' '#1082#1083#1080#1077#1085#1090#1072#1084
+    TabOrder = 7
+    OnClick = Button6Click
   end
   object ADODataDriverEh1: TADODataDriverEh
     ConnectionString = 
@@ -313,7 +322,7 @@ object ClientListForm: TClientListForm
     SpecParams.Strings = (
       'AUTO_INCREMENT_FIELD=id')
     SelectCommand.CommandText.Strings = (
-      'select * from clients')
+      'select * from  [clients '#1047#1072#1087#1088#1086#1089'1]')
     SelectCommand.Parameters = <>
     UpdateCommand.CommandText.Strings = (
       'update clients'
@@ -518,26 +527,27 @@ object ClientListForm: TClientListForm
         Size = 510
         Value = Null
       end>
-    Left = 688
+    Left = 760
     Top = 424
   end
   object ADOConnectionProviderEh1: TADOConnectionProviderEh
     InlineConnection.Provider = 'Microsoft.ACE.OLEDB.12.0'
     ServerType = 'MSAccess'
     InlineConnectionBeforeConnect = ADOConnectionProviderEh1InlineConnectionBeforeConnect
-    Left = 728
+    Left = 800
     Top = 424
   end
   object DataSource1: TDataSource
     DataSet = MemTableEh1
-    Left = 768
+    Left = 832
     Top = 424
   end
   object MemTableEh1: TMemTableEh
+    Active = True
     AutoCalcFields = False
     FieldDefs = <
       item
-        Name = 'ID'
+        Name = 'id'
         DataType = ftAutoInc
         Precision = 15
       end
@@ -582,6 +592,10 @@ object ClientListForm: TClientListForm
         Size = 255
       end
       item
+        Name = 'BirthDate'
+        DataType = ftDateTime
+      end
+      item
         Name = 'CreateDate'
         DataType = ftDateTime
       end
@@ -594,7 +608,7 @@ object ClientListForm: TClientListForm
     DataDriver = ADODataDriverEh1
     StoreDefs = True
     AfterOpen = MemTableEh1AfterOpen
-    Left = 648
+    Left = 720
     Top = 424
   end
   object IdHTTP1: TIdHTTP
@@ -612,7 +626,7 @@ object ClientListForm: TClientListForm
     Request.BasicAuthentication = False
     Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
     HTTPOptions = [hoForceEncodeParams]
-    Left = 816
+    Left = 864
     Top = 424
   end
   object frxReport1: TfrxReport
@@ -642,7 +656,7 @@ object ClientListForm: TClientListForm
       ''
       'end.')
     OnRunDialogs = 'frxReport1OnRunDialogs'
-    Left = 688
+    Left = 720
     Top = 456
     Datasets = <
       item
@@ -832,7 +846,7 @@ object ClientListForm: TClientListForm
           ParentFont = False
         end
         object Memo9: TfrxMemoView
-          Top = 68.031540000000000000
+          Top = 68.031540000000010000
           Width = 215.433210000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -848,7 +862,7 @@ object ClientListForm: TClientListForm
         end
         object Memo10: TfrxMemoView
           Left = 215.433210000000000000
-          Top = 68.031540000000000000
+          Top = 68.031540000000010000
           Width = 370.393940000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -864,7 +878,7 @@ object ClientListForm: TClientListForm
         end
         object Memo11: TfrxMemoView
           Left = 585.827150000000000000
-          Top = 68.031540000000000000
+          Top = 68.031540000000010000
           Width = 132.283550000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -888,11 +902,11 @@ object ClientListForm: TClientListForm
       Font.Style = []
       BorderStyle = bsDialog
       DoubleBuffered = False
-      Height = 228.000000000000000000
+      Height = 223.000000000000000000
       ClientHeight = 189.000000000000000000
       Left = 392.000000000000000000
       Top = 238.000000000000000000
-      Width = 395.000000000000000000
+      Width = 387.000000000000000000
       Scaled = True
       ClientWidth = 379.000000000000000000
       object Label1: TfrxLabelControl
@@ -987,12 +1001,12 @@ object ClientListForm: TClientListForm
     end
   end
   object frxDialogControls1: TfrxDialogControls
-    Left = 728
+    Left = 800
     Top = 456
   end
   object frxADOComponents1: TfrxADOComponents
     DefaultDatabase = ADOConnection1
-    Left = 768
+    Left = 832
     Top = 456
   end
   object ADOConnection1: TADOConnection
@@ -1003,7 +1017,332 @@ object ClientListForm: TClientListForm
     LoginPrompt = False
     Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'
-    Left = 816
+    Left = 864
     Top = 456
+  end
+  object frxReport2: TfrxReport
+    Version = '6.0.10'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43272.438285405100000000
+    ReportOptions.LastChange = 43272.575266562500000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'procedure Button1OnClick(Sender: TfrxComponent);'
+      'begin'
+      
+        '  MasterData1.Visible := Checkbox1.Checked;                     ' +
+        '                                                   '
+      'end;'
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 760
+    Top = 456
+    Datasets = <
+      item
+        DataSet = frxReport2.ADOQuery1
+        DataSetName = 'ADOQuery1'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+      object ADOQuery1: TfrxADOQuery
+        UserName = 'ADOQuery1'
+        CloseDataSource = True
+        BCDToCurrency = False
+        IgnoreDupParams = False
+        Params = <>
+        SQL.Strings = (
+          
+            'SELECT Clients.id, Clients.FirstName, Clients.Surname, Clients.B' +
+            'irthDate, "'#1040#1076#1088#1077#1089'" AS NameField,'
+          
+            '       Address.Address AS Name,1 as ordLine, Address.num as num ' +
+            '                                                                ' +
+            '                                                      '
+          'FROM Clients LEFT JOIN Address ON Clients.id = Address.client_id'
+          'UNION ALL'
+          
+            'SELECT Clients.id, Clients.FirstName, Clients.Surname, Clients.B' +
+            'irthDate, "'#1069#1083'.'#1087#1086#1095#1090#1072'" AS NameField,'
+          
+            '       Email.Email AS Name,2 as ordLine,Email.num as num        ' +
+            '                                                                ' +
+            '                                               '
+          'FROM Clients LEFT JOIN Email ON Clients.id = Email.client_id'
+          'UNION ALL'
+          
+            'SELECT Clients.id, Clients.FirstName, Clients.Surname, Clients.B' +
+            'irthDate, "'#1053#1086#1084#1077#1088' '#1090#1077#1083#1077#1092#1086#1085#1072'" AS NameField,'
+          
+            '       Phone.Phone AS Name,3 as ordLine,Phone.num as num        ' +
+            '                                                                ' +
+            '                                               '
+          'FROM Clients LEFT JOIN Phone ON Clients.id = Phone.client_id'
+          
+            'ORDER BY Clients.id,ordLine,num                                 ' +
+            '  '
+          '              '
+          '  ')
+        CommandTimeout = 30
+        LockType = ltReadOnly
+        pLeft = 68
+        pTop = 44
+        Parameters = <>
+      end
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 60.472480000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Left = 143.622140000000000000
+          Width = 427.086890000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8 = (
+            #1056#1115#1057#8218#1057#8225#1056#181#1057#8218' '#1056#1111#1056#1109' '#1056#1108#1056#187#1056#1105#1056#181#1056#1029#1057#8218#1056#176#1056#1112)
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Top = 22.677180000000000000
+          Width = 211.653680000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8 = (
+            #1056#152#1056#1112#1057#1039)
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 211.653680000000000000
+          Top = 22.677180000000000000
+          Width = 302.362400000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8 = (
+            #1056#164#1056#176#1056#1112#1056#1105#1056#187#1056#1105#1057#1039)
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 514.016080000000000000
+          Top = 22.677180000000000000
+          Width = 200.315090000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Width = 1.500000000000000000
+          HAlign = haCenter
+          Memo.UTF8 = (
+            #1056#8221#1056#176#1057#8218#1056#176' '#1057#1026#1056#1109#1056#182#1056#1169#1056#181#1056#1029#1056#1105#1057#1039)
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897650000000000000
+        Top = 181.417440000000000000
+        Width = 718.110700000000000000
+        DataSet = frxReport2.ADOQuery1
+        DataSetName = 'ADOQuery1'
+        RowCount = 0
+        object ADOQuery1FirstName: TfrxMemoView
+          IndexTag = 1
+          Left = 215.433210000000000000
+          Width = 514.016080000000000000
+          Height = 18.897650000000000000
+          DataSet = frxReport2.ADOQuery1
+          DataSetName = 'ADOQuery1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8 = (
+            '[ADOQuery1."name"]')
+          ParentFont = False
+        end
+        object ADOQuery1NameField: TfrxMemoView
+          IndexTag = 1
+          Left = 3.779530000000000000
+          Width = 204.094620000000000000
+          Height = 18.897650000000000000
+          DataField = 'NameField'
+          DataSet = frxReport2.ADOQuery1
+          DataSetName = 'ADOQuery1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8 = (
+            '[ADOQuery1."NameField"]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897650000000000000
+        Top = 139.842610000000000000
+        Width = 718.110700000000000000
+        Condition = 'ADOQuery1."id"'
+        object ADOQuery1FirstName1: TfrxMemoView
+          IndexTag = 1
+          Width = 215.433210000000000000
+          Height = 18.897650000000000000
+          DataField = 'FirstName'
+          DataSet = frxReport2.ADOQuery1
+          DataSetName = 'ADOQuery1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            '[ADOQuery1."FirstName"]')
+          ParentFont = False
+        end
+        object ADOQuery1SurName1: TfrxMemoView
+          IndexTag = 1
+          Left = 215.433210000000000000
+          Width = 298.582870000000000000
+          Height = 18.897650000000000000
+          DataField = 'SurName'
+          DataSet = frxReport2.ADOQuery1
+          DataSetName = 'ADOQuery1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            '[ADOQuery1."SurName"]')
+          ParentFont = False
+        end
+        object ADOQuery1BirthDate: TfrxMemoView
+          IndexTag = 1
+          Left = 514.016080000000000000
+          Width = 200.315090000000000000
+          Height = 18.897650000000000000
+          DataField = 'BirthDate'
+          DataSet = frxReport2.ADOQuery1
+          DataSetName = 'ADOQuery1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            '[ADOQuery1."BirthDate"]')
+          ParentFont = False
+        end
+      end
+    end
+    object DialogPage1: TfrxDialogPage
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      BorderStyle = bsDialog
+      DoubleBuffered = False
+      Height = 200.000000000000000000
+      ClientHeight = 166.000000000000000000
+      Left = 446.000000000000000000
+      Top = 181.000000000000000000
+      Width = 300.000000000000000000
+      Scaled = True
+      ClientWidth = 292.000000000000000000
+      object Button1: TfrxButtonControl
+        Left = 44.000000000000000000
+        Top = 108.000000000000000000
+        Width = 75.000000000000000000
+        Height = 25.000000000000000000
+        ShowHint = True
+        Caption = #1054#1090#1095#1077#1090
+        ModalResult = 1
+        OnClick = 'Button1OnClick'
+      end
+      object Button2: TfrxButtonControl
+        Left = 172.000000000000000000
+        Top = 108.000000000000000000
+        Width = 75.000000000000000000
+        Height = 25.000000000000000000
+        ShowHint = True
+        Caption = #1054#1090#1084#1077#1085#1072
+        ModalResult = 2
+      end
+      object Label1: TfrxLabelControl
+        Left = 80.000000000000000000
+        Top = 28.000000000000000000
+        Width = 112.000000000000000000
+        Height = 16.000000000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ShowHint = True
+        Caption = #1054#1090#1095#1077#1090' '#1087#1086' '#1082#1083#1080#1077#1085#1090#1072#1084
+        Color = clBtnFace
+      end
+      object CheckBox1: TfrxCheckBoxControl
+        Left = 64.000000000000000000
+        Top = 60.000000000000000000
+        Width = 149.000000000000000000
+        Height = 17.000000000000000000
+        ShowHint = True
+        Caption = #1055#1086#1076#1088#1086#1073#1085#1099#1081' '#1086#1090#1095#1077#1090
+        Color = clBtnFace
+      end
+    end
   end
 end

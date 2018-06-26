@@ -52,6 +52,8 @@ type
     frxDialogControls1: TfrxDialogControls;
     frxADOComponents1: TfrxADOComponents;
     ADOConnection1: TADOConnection;
+    Button6: TButton;
+    frxReport2: TfrxReport;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -66,6 +68,7 @@ type
     procedure DBGridEh1SortMarkingChanged(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure DateTimePicker1CloseUp(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     //procedure DateTimePicker1Change(Sender: TObject);
   private
     { Private declarations }
@@ -140,12 +143,16 @@ begin
      DBGridEh1.Columns[8].Visible:=false;
 
      DBGridEh1.Columns[9].Width:=0;
-     DBGridEh1.Columns[9].Title.Caption:='Дата создания';
+     DBGridEh1.Columns[9].Title.Caption:='Дата рождения';
      DBGridEh1.Columns[9].Visible:=false;
 
      DBGridEh1.Columns[10].Width:=0;
-     DBGridEh1.Columns[10].Title.Caption:='Дата корректировки';
+     DBGridEh1.Columns[10].Title.Caption:='Дата создания';
      DBGridEh1.Columns[10].Visible:=false;
+
+     DBGridEh1.Columns[11].Width:=0;
+     DBGridEh1.Columns[11].Title.Caption:='Дата корректировки';
+     DBGridEh1.Columns[11].Visible:=false;
 
      DBGridEh1.Width :=875;
    end;
@@ -347,5 +354,10 @@ begin
   DisplayCurrency;
 end;
 
+
+procedure TClientListForm.Button6Click(Sender: TObject);
+begin
+  frxReport2.ShowReport;
+end;
 
 end.
