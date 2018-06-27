@@ -117,6 +117,8 @@ begin
 end;
 
 procedure TClientEditForm.Button1Click(Sender: TObject);
+var
+  curID: Integer;
 begin
   if length(DBEditEh1.Text) = 0 then
     begin
@@ -158,12 +160,25 @@ begin
   }
   with clientListForm do
     begin
+       if not ADOConnection1.Connected then
+          ADOConnection1.Open; 
        ADOConnection1.BeginTrans;
        try
           // Заполнение основной таблицы
           MemTableEh1.Post;
           //Label13.Caption := ADODataDriverEh1.InsertCommand.Parameters.ParamValues['new_id'];
-          Label13.Caption := MemTableEh1.FieldByName('id').AsString;
+          // Получение идентификатора
+          if flagInsert then
+             begin
+                AdoQuery1.SQL.Clear;
+                //ADOQuery1.SQL.Text := 'select @@identity as LastInsertedID';
+                ADOQuery1.SQL.Text := 'select max(id) from clients';
+                ADOQuery1.Open;
+                curID:= ADOQuery1.Fields[0].AsInteger;
+             end
+          else
+             curID := strtoint(DbGridEh1.FieldColumns['id'].DisplayText);
+          //Label13.Caption := inttostr(curID);
           //Работа с дополнительными таблицами
           {
           if not flagInsert then
@@ -199,7 +214,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('insert into addresses (client_id, num, address) values (:id, 1, :address)');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh3.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -207,7 +222,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('update addresses set address = :address where client_id = :id and num = 1');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh3.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -217,7 +232,7 @@ begin
                 begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('delete from addresses where client_id = :id and num = 1');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.ExecSQL;
                 end;
             end;
@@ -237,7 +252,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('insert into addresses (client_id, num, address) values (:id, 2, :address)');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh4.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -245,7 +260,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('update addresses set address = :address where client_id = :id and num = 2');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh4.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -255,7 +270,7 @@ begin
                 begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('delete from addresses where client_id = :id and num = 2');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.ExecSQL;
                 end;
             end;
@@ -275,7 +290,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('insert into emails (client_id, num, email) values (:id, 1, :email)');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh5.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -283,7 +298,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('update emails set email = :email where client_id = :id and num = 1');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh5.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -293,7 +308,7 @@ begin
                 begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('delete from emails where client_id = :id and num = 1');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.ExecSQL;
                 end;
             end;
@@ -313,7 +328,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('insert into emails (client_id, num, email) values (:id, 2, :email)');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh6.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -321,7 +336,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('update emails set email = :email where client_id = :id and num = 2');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh6.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -331,7 +346,7 @@ begin
                 begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('delete from emails where client_id = :id and num = 2');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.ExecSQL;
                 end;
             end;
@@ -351,7 +366,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('insert into phones (client_id, num, phone) values (:id, 1, :phone)');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -359,7 +374,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('update phones set phone = :phone where client_id = :id and num = 1');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -369,7 +384,7 @@ begin
                 begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('delete from phones where client_id = :id and num = 1');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.ExecSQL;
                 end;
             end;
@@ -389,7 +404,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('insert into phones (client_id, num, phone) values (:id, 2, :phone)');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh8.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -397,7 +412,7 @@ begin
                  begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('update phones set phone = :phone where client_id = :id and num = 2');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh8.Text;
                    ADOQuery1.ExecSQL;
                  end
@@ -407,7 +422,7 @@ begin
                 begin
                    AdoQuery1.SQL.Clear;
                    ADOQuery1.SQL.Add('delete from phones where client_id = :id and num = 2');
-                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
                    ADOQuery1.ExecSQL;
                 end;
             end;

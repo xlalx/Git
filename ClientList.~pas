@@ -56,7 +56,6 @@ type
     Label12: TLabel;
     DBEditEh9: TDBEditEh;
     ADOQuery1: TADOQuery;
-    Label13: TLabel;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -72,8 +71,6 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure DateTimePicker1CloseUp(Sender: TObject);
     procedure Button6Click(Sender: TObject);
-    procedure DBGridEh1MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     //procedure DateTimePicker1Change(Sender: TObject);
   private
     { Private declarations }
@@ -345,8 +342,8 @@ begin
            ADOQuery1.ExecSQL;
            // Удаление основной таблицы
            MemTableEh1.Delete;
-           ADOConnection1.CommitTrans;
            MemTableEh1.ApplyUpdates(0);
+           ADOConnection1.CommitTrans;
            DbGridEh1.Refresh;
         except
            on E:Exception Do
@@ -400,10 +397,12 @@ begin
   frxReport2.ShowReport;
 end;
 
+{
 procedure TClientListForm.DBGridEh1MouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   Label13.Caption := MemTableEh1.FieldByName('id').AsString;
 end;
+}
 
 end.
