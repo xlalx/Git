@@ -1252,17 +1252,35 @@ object ClientListForm: TClientListForm
       end
       item
         Name = 'address'
+        DataType = ftString
         Size = -1
         Value = Null
       end
       item
         Name = 'email'
+        DataType = ftString
         Size = -1
         Value = Null
       end
       item
         Name = 'phone'
+        DataType = ftString
         Size = -1
+        Value = Null
+      end
+      item
+        Name = 'address2'
+        DataType = ftString
+        Value = Null
+      end
+      item
+        Name = 'email2'
+        DataType = ftString
+        Value = Null
+      end
+      item
+        Name = 'phone2'
+        DataType = ftString
         Value = Null
       end>
     Left = 800

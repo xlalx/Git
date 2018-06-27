@@ -71,7 +71,6 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure DateTimePicker1CloseUp(Sender: TObject);
     procedure Button6Click(Sender: TObject);
-    //procedure DateTimePicker1Change(Sender: TObject);
   private
     { Private declarations }
     procedure DisplayCurrency;
@@ -102,10 +101,6 @@ var
   FilePath: String;
 begin
   FilePath := ExtractFilePath(ParamStr(0))+'\clients.mdb';
-  //ADOConnectionProviderEh1.InlineConnection.ConnectionString :=
-  //  'Provider=Microsoft.ACE.OLEDB.4.0;'+
-  //  'Data Source=' + FilePath + ';'+
-  //  'Persist Security Info=False';
 end;
 
 procedure TClientListForm.SetGridColumn;
@@ -229,13 +224,9 @@ begin
    jsCurse := TlkJSON.ParseText(getStr) as TlkJSONobject;
    strCurrency := vartostr(jsCurse.Field['Cur_OfficialRate'].Value);
    if strCurrency <> '' then
-     begin
-      //strCurrency := copy(getStr,iPos+length('Cur_OfficialRate')+2,6);
-      Label10.Caption := strCurrency+' '+strCnt;
-     end
+      Label10.Caption := strCurrency+' '+strCnt
    else
-     Label10.Caption := 'Невозможно обработать информацию о курсе валют';
-     //ShowMessage('Невозможно обработать информацию о курсе валют');
+      Label10.Caption := 'Невозможно обработать информацию о курсе валют';
    jsCurse.Free;
 end;
 
@@ -313,7 +304,6 @@ procedure TClientListForm.Button2Click(Sender: TObject);
 begin
   flagInsert:=false;
   clientEditForm:=TClientEditForm.Create(Application);
-  //MemTableEh1.Edit;
   clientEditForm.ShowModal;
   clientEditForm.Free;
 end;
@@ -368,7 +358,6 @@ procedure TClientListForm.Button4Click(Sender: TObject);
 begin
   flagInsert:=true;
   clientEditForm:=TClientEditForm.Create(Application);
-  //MemTableEh1.Append;
   clientEditForm.ShowModal;
   clientEditForm.Free;
   SetGridButton;
@@ -396,13 +385,5 @@ procedure TClientListForm.Button6Click(Sender: TObject);
 begin
   frxReport2.ShowReport;
 end;
-
-{
-procedure TClientListForm.DBGridEh1MouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  Label13.Caption := MemTableEh1.FieldByName('id').AsString;
-end;
-}
 
 end.

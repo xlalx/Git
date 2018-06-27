@@ -52,7 +52,6 @@ type
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-    //function CheckEmptyFields:boolean;
     oldRecord : TOldRecord;
   public
     { Public declarations }
@@ -144,70 +143,25 @@ begin
        DBEditEh7.SetFocus;
        Exit;
     end;
-  // Запись информации и переоткрытие таблицы
-  {
-  try
-    begin
-     ClientListForm.MemTableEh1.Post;
-     ClientListForm.MemTableEh1.ApplyUpdates(-1);
-    end
-  except
-     on E:Exception Do
-      begin
-        ShowMessage('Ошибка при работе с БД '+e.Message)
-      end
-  end;
-  }
   with clientListForm do
     begin
        if not ADOConnection1.Connected then
-          ADOConnection1.Open; 
+          ADOConnection1.Open;
        ADOConnection1.BeginTrans;
        try
           // Заполнение основной таблицы
           MemTableEh1.Post;
-          //Label13.Caption := ADODataDriverEh1.InsertCommand.Parameters.ParamValues['new_id'];
           // Получение идентификатора
           if flagInsert then
              begin
                 AdoQuery1.SQL.Clear;
-                //ADOQuery1.SQL.Text := 'select @@identity as LastInsertedID';
                 ADOQuery1.SQL.Text := 'select max(id) from clients';
                 ADOQuery1.Open;
                 curID:= ADOQuery1.Fields[0].AsInteger;
              end
           else
              curID := strtoint(DbGridEh1.FieldColumns['id'].DisplayText);
-          //Label13.Caption := inttostr(curID);
           //Работа с дополнительными таблицами
-          {
-          if not flagInsert then
-             begin
-                // При редактировании удаляем всю дополнительную информацию и заново добавляем
-                AdoQuery1.SQL.Clear;
-                ADOQuery1.SQL.Add('delete from addresses where client_id = :id');
-                ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-                ADOQuery1.ExecSQL;
-                AdoQuery1.SQL.Clear;
-                ADOQuery1.SQL.Add('delete from phones where client_id = :id');
-                ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-                ADOQuery1.ExecSQL;
-                AdoQuery1.SQL.Clear;
-                ADOQuery1.SQL.Add('delete from emails where client_id = :id');
-                ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-                ADOQuery1.ExecSQL;
-            end;
-          }
-          {
-          if length(DBEditEh3.Text) <> 0 then
-            begin
-              AdoQuery1.SQL.Clear;
-              ADOQuery1.SQL.Add('insert into addresses (client_id, num, address) values (:id, 1, :address)');
-              ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-              ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh3.Text;
-              ADOQuery1.ExecSQL;
-            end;
-          }
           // Адрес
           if length(DBEditEh3.Text) <> 0 then
               if length(oldRecord.address) = 0 then
@@ -236,16 +190,6 @@ begin
                    ADOQuery1.ExecSQL;
                 end;
             end;
-          {
-          if length(DBEditEh4.Text) <> 0 then
-            begin
-              AdoQuery1.SQL.Clear;
-              ADOQuery1.SQL.Add('insert into addresses (client_id, num, address) values (:id, 2, :address)');
-              ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-              ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh4.Text;
-              ADOQuery1.ExecSQL;
-            end;
-          }
           // Дополнительный адрес
           if length(DBEditEh4.Text) <> 0 then
               if length(oldRecord.address2) = 0 then
@@ -274,16 +218,6 @@ begin
                    ADOQuery1.ExecSQL;
                 end;
             end;
-          {
-          if length(DBEditEh5.Text) <> 0 then
-            begin
-              AdoQuery1.SQL.Clear;
-              ADOQuery1.SQL.Add('insert into emails (client_id, num, email) values (:id, 1, :email)');
-              ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-              ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh5.Text;
-              ADOQuery1.ExecSQL;
-            end;
-          }
           // Почта
           if length(DBEditEh5.Text) <> 0 then
               if length(oldRecord.email) = 0 then
@@ -312,16 +246,6 @@ begin
                    ADOQuery1.ExecSQL;
                 end;
             end;
-          {
-          if length(DBEditEh6.Text) <> 0 then
-            begin
-              AdoQuery1.SQL.Clear;
-              ADOQuery1.SQL.Add('insert into emails (client_id, num, email) values (:id, 2, :email)');
-              ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-              ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh6.Text;
-              ADOQuery1.ExecSQL;
-            end;
-          }
           // Дополнительная почта
           if length(DBEditEh6.Text) <> 0 then
               if length(oldRecord.email2) = 0 then
@@ -350,16 +274,6 @@ begin
                    ADOQuery1.ExecSQL;
                 end;
             end;
-          {
-          if length(DBEditEh7.Text) <> 0 then
-            begin
-              AdoQuery1.SQL.Clear;
-              ADOQuery1.SQL.Add('insert into phones (client_id, num, phone) values (:id, 1, :phone)');
-              ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-              ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
-              ADOQuery1.ExecSQL;
-            end;
-          }
           // Телефон
           if length(DBEditEh7.Text) <> 0 then
               if length(oldRecord.phone) = 0 then
@@ -388,16 +302,6 @@ begin
                    ADOQuery1.ExecSQL;
                 end;
             end;
-          {
-          if length(DBEditEh8.Text) <> 0 then
-            begin
-              AdoQuery1.SQL.Clear;
-              ADOQuery1.SQL.Add('insert into phones (client_id, num, phone) values (:id, 2, :phone)');
-              ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
-              ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
-              ADOQuery1.ExecSQL;
-            end;
-          }
           // Дополнительный телефон
           if length(DBEditEh8.Text) <> 0 then
               if length(oldRecord.phone2) = 0 then
@@ -434,8 +338,7 @@ begin
             begin
               MemTableEh1.Cancel;
               ADOConnection1.RollBackTrans;
-              //ShowMessage('Ошибка при удалении клиента: '+e.Message);
-              raise;
+              ShowMessage('Ошибка при удалении клиента: '+e.Message);
             end;
        end;
     end;
@@ -444,7 +347,6 @@ end;
 
 procedure TClientEditForm.Button2Click(Sender: TObject);
 begin
-   //clientListForm.MemTableEh1.Cancel;
    clientEditForm.close;
 end;
 

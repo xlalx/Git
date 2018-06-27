@@ -208,18 +208,34 @@ begin
               ADOQuery1.ExecSQL;
             end;
           }
-          AdoQuery1.SQL.Clear;
-          ADOQuery1.Parameters.ParamByName('id').Value := curID;
-          ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh3.Text;
           // Адрес
           if length(DBEditEh3.Text) <> 0 then
               if length(oldRecord.address) = 0 then
-                 ADOQuery1.SQL.Add('insert into addresses (client_id, num, address) values (:id, 1, :address)');
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('insert into addresses (client_id, num, address) values (:id, 1, :address)');
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
+                   ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh3.Text;
+                   ADOQuery1.ExecSQL;
+                 end
               else
-                 ADOQuery1.SQL.Add('update addresses set address = :address where client_id = :id and num = 1');
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('update addresses set address = :address where client_id = :id and num = 1');
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
+                   ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh3.Text;
+                   ADOQuery1.ExecSQL;
+                 end
           else
+            begin
               if (not flagInsert) and (length(oldRecord.address) <> 0) then
-                 ADOQuery1.SQL.Add('delete from addresses where client_id = :id and num = 1');
+                begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('delete from addresses where client_id = :id and num = 1');
+                   ADOQuery1.Parameters.ParamByName('id').Value := curID;
+                   ADOQuery1.ExecSQL;
+                end;
+            end;
           {
           if length(DBEditEh4.Text) <> 0 then
             begin

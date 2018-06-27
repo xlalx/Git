@@ -550,7 +550,7 @@ object ClientListForm: TClientListForm
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43265.493419594900000000
+    ReportOptions.CreateDate = 43265.493419594910000000
     ReportOptions.LastChange = 43266.833794710600000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
@@ -1271,16 +1271,19 @@ object ClientListForm: TClientListForm
       item
         Name = 'address2'
         DataType = ftString
+        Size = -1
         Value = Null
       end
       item
         Name = 'email2'
         DataType = ftString
+        Size = -1
         Value = Null
       end
       item
         Name = 'phone2'
         DataType = ftString
+        Size = -1
         Value = Null
       end>
     Left = 800
