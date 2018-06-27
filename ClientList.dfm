@@ -560,7 +560,7 @@ object ClientListForm: TClientListForm
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43265.493419594910000000
+    ReportOptions.CreateDate = 43265.493419594900000000
     ReportOptions.LastChange = 43266.833794710600000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
@@ -769,7 +769,7 @@ object ClientListForm: TClientListForm
           ParentFont = False
         end
         object Memo9: TfrxMemoView
-          Top = 68.031540000000010000
+          Top = 68.031540000000000000
           Width = 215.433210000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -785,7 +785,7 @@ object ClientListForm: TClientListForm
         end
         object Memo10: TfrxMemoView
           Left = 215.433210000000000000
-          Top = 68.031540000000010000
+          Top = 68.031540000000000000
           Width = 370.393940000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -801,7 +801,7 @@ object ClientListForm: TClientListForm
         end
         object Memo11: TfrxMemoView
           Left = 585.827150000000000000
-          Top = 68.031540000000010000
+          Top = 68.031540000000000000
           Width = 132.283550000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -1019,7 +1019,7 @@ object ClientListForm: TClientListForm
         FillType = ftBrush
         Frame.Typ = []
         Height = 60.472480000000000000
-        Top = 16.000000000000000000
+        Top = 18.897650000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
           Left = 143.622140000000000000
@@ -1089,7 +1089,7 @@ object ClientListForm: TClientListForm
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 136.000000000000000000
+        Top = 181.417440000000000000
         Width = 718.110700000000000000
         DataSet = frxReport2.ADOQuery1
         DataSetName = 'ADOQuery1'
@@ -1134,7 +1134,7 @@ object ClientListForm: TClientListForm
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 96.000000000000000000
+        Top = 139.842610000000000000
         Width = 718.110700000000000000
         Condition = 'ADOQuery1."id"'
         object ADOQuery1FirstName1: TfrxMemoView

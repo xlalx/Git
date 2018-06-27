@@ -345,8 +345,8 @@ begin
            ADOQuery1.ExecSQL;
            // Удаление основной таблицы
            MemTableEh1.Delete;
-           ADOConnection1.CommitTrans;
            MemTableEh1.ApplyUpdates(0);
+           ADOConnection1.CommitTrans;
            DbGridEh1.Refresh;
         except
            on E:Exception Do

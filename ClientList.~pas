@@ -56,6 +56,7 @@ type
     Label12: TLabel;
     DBEditEh9: TDBEditEh;
     ADOQuery1: TADOQuery;
+    Label13: TLabel;
     procedure ADOConnectionProviderEh1InlineConnectionBeforeConnect(
       Sender: TObject);
     procedure MemTableEh1AfterOpen(DataSet: TDataSet);
@@ -71,6 +72,8 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure DateTimePicker1CloseUp(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure DBGridEh1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     //procedure DateTimePicker1Change(Sender: TObject);
   private
     { Private declarations }
@@ -351,7 +354,6 @@ begin
                MemTableEh1.Cancel;
                ADOConnection1.RollBackTrans;
                ShowMessage('Ошибка при удалении клиента: '+e.Message);
-               raise;
              end;
         end;
      end;
@@ -396,6 +398,12 @@ end;
 procedure TClientListForm.Button6Click(Sender: TObject);
 begin
   frxReport2.ShowReport;
+end;
+
+procedure TClientListForm.DBGridEh1MouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  Label13.Caption := MemTableEh1.FieldByName('id').AsString;
 end;
 
 end.

@@ -193,6 +193,7 @@ begin
               ADOQuery1.ExecSQL;
             end;
           }
+          // Адрес
           if length(DBEditEh3.Text) <> 0 then
               if length(oldRecord.address) = 0 then
                  begin
@@ -205,7 +206,7 @@ begin
               else
                  begin
                    AdoQuery1.SQL.Clear;
-                   ADOQuery1.SQL.Add('update addresses set address = :address where client_id = :id');
+                   ADOQuery1.SQL.Add('update addresses set address = :address where client_id = :id and num = 1');
                    ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
                    ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh3.Text;
                    ADOQuery1.ExecSQL;
@@ -230,6 +231,7 @@ begin
               ADOQuery1.ExecSQL;
             end;
           }
+          // Дополнительный адрес
           if length(DBEditEh4.Text) <> 0 then
               if length(oldRecord.address2) = 0 then
                  begin
@@ -242,7 +244,7 @@ begin
               else
                  begin
                    AdoQuery1.SQL.Clear;
-                   ADOQuery1.SQL.Add('update addresses set address = :address where client_id = :id');
+                   ADOQuery1.SQL.Add('update addresses set address = :address where client_id = :id and num = 2');
                    ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
                    ADOQuery1.Parameters.ParamByName('address').Value := DBEditEh4.Text;
                    ADOQuery1.ExecSQL;
@@ -257,6 +259,7 @@ begin
                    ADOQuery1.ExecSQL;
                 end;
             end;
+          {
           if length(DBEditEh5.Text) <> 0 then
             begin
               AdoQuery1.SQL.Clear;
@@ -265,6 +268,36 @@ begin
               ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh5.Text;
               ADOQuery1.ExecSQL;
             end;
+          }
+          // Почта
+          if length(DBEditEh5.Text) <> 0 then
+              if length(oldRecord.email) = 0 then
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('insert into emails (client_id, num, email) values (:id, 1, :email)');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh5.Text;
+                   ADOQuery1.ExecSQL;
+                 end
+              else
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('update emails set email = :email where client_id = :id and num = 1');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh5.Text;
+                   ADOQuery1.ExecSQL;
+                 end
+          else
+            begin
+              if (not flagInsert) and (length(oldRecord.email) <> 0) then
+                begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('delete from emails where client_id = :id and num = 1');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.ExecSQL;
+                end;
+            end;
+          {
           if length(DBEditEh6.Text) <> 0 then
             begin
               AdoQuery1.SQL.Clear;
@@ -273,6 +306,36 @@ begin
               ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh6.Text;
               ADOQuery1.ExecSQL;
             end;
+          }
+          // Дополнительная почта
+          if length(DBEditEh6.Text) <> 0 then
+              if length(oldRecord.email2) = 0 then
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('insert into emails (client_id, num, email) values (:id, 2, :email)');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh6.Text;
+                   ADOQuery1.ExecSQL;
+                 end
+              else
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('update emails set email = :email where client_id = :id and num = 2');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('email').Value := DBEditEh6.Text;
+                   ADOQuery1.ExecSQL;
+                 end
+          else
+            begin
+              if (not flagInsert) and (length(oldRecord.email2) <> 0) then
+                begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('delete from emails where client_id = :id and num = 2');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.ExecSQL;
+                end;
+            end;
+          {
           if length(DBEditEh7.Text) <> 0 then
             begin
               AdoQuery1.SQL.Clear;
@@ -281,6 +344,36 @@ begin
               ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
               ADOQuery1.ExecSQL;
             end;
+          }
+          // Телефон
+          if length(DBEditEh7.Text) <> 0 then
+              if length(oldRecord.phone) = 0 then
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('insert into phones (client_id, num, phone) values (:id, 1, :phone)');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
+                   ADOQuery1.ExecSQL;
+                 end
+              else
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('update phones set phone = :phone where client_id = :id and num = 1');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
+                   ADOQuery1.ExecSQL;
+                 end
+          else
+            begin
+              if (not flagInsert) and (length(oldRecord.phone) <> 0) then
+                begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('delete from phones where client_id = :id and num = 1');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.ExecSQL;
+                end;
+            end;
+          {
           if length(DBEditEh8.Text) <> 0 then
             begin
               AdoQuery1.SQL.Clear;
@@ -288,6 +381,35 @@ begin
               ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
               ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh7.Text;
               ADOQuery1.ExecSQL;
+            end;
+          }
+          // Дополнительный телефон
+          if length(DBEditEh8.Text) <> 0 then
+              if length(oldRecord.phone2) = 0 then
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('insert into phones (client_id, num, phone) values (:id, 2, :phone)');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh8.Text;
+                   ADOQuery1.ExecSQL;
+                 end
+              else
+                 begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('update phones set phone = :phone where client_id = :id and num = 2');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.Parameters.ParamByName('phone').Value := DBEditEh8.Text;
+                   ADOQuery1.ExecSQL;
+                 end
+          else
+            begin
+              if (not flagInsert) and (length(oldRecord.phone2) <> 0) then
+                begin
+                   AdoQuery1.SQL.Clear;
+                   ADOQuery1.SQL.Add('delete from phones where client_id = :id and num = 2');
+                   ADOQuery1.Parameters.ParamByName('id').Value := DbGridEh1.FieldColumns['id'].DisplayText;
+                   ADOQuery1.ExecSQL;
+                end;
             end;
           MemTableEh1.ApplyUpdates(0);
           ADOConnection1.CommitTrans;
