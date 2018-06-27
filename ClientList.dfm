@@ -18,6 +18,13 @@ object ClientListForm: TClientListForm
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
+  object Label13: TLabel
+    Left = 152
+    Top = 480
+    Width = 38
+    Height = 13
+    Caption = 'Label13'
+  end
   object DBGridEh1: TDBGridEh
     Left = 16
     Top = 40
@@ -34,6 +41,7 @@ object ClientListForm: TClientListForm
     SortLocal = True
     TabOrder = 0
     TitleParams.SortMarkerStyle = smstDefaultEh
+    OnMouseDown = DBGridEh1MouseDown
     OnSortMarkingChanged = DBGridEh1SortMarkingChanged
     object RowDetailData: TRowDetailPanelControlEh
       object Panel1: TPanel
@@ -1254,14 +1262,17 @@ object ClientListForm: TClientListForm
       end
       item
         Name = 'address'
+        Size = -1
         Value = Null
       end
       item
         Name = 'email'
+        Size = -1
         Value = Null
       end
       item
         Name = 'phone'
+        Size = -1
         Value = Null
       end>
     Left = 800

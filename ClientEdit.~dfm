@@ -1,9 +1,11 @@
 object ClientEditForm: TClientEditForm
   Left = 460
   Top = 332
-  Width = 683
-  Height = 305
+  BorderIcons = []
+  BorderStyle = bsSingle
   Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1085#1080#1077' '#1079#1072#1087#1080#1089#1080
+  ClientHeight = 271
+  ClientWidth = 675
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
